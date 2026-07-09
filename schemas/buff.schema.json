@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tl-ai.local/schemas/buff.schema.json",
+  "title": "Buff",
+  "description": "Buff/debuff specification. Stored under specifications/buffs/.",
+  "allOf": [
+    {
+      "$ref": "entity.schema.json"
+    }
+  ],
+  "properties": {
+    "id": {
+      "pattern": "^tl\\.buff\\.[a-z0-9_]+$"
+    },
+    "type": {
+      "const": "Buff"
+    },
+    "stats": {
+      "description": "References to Stat entities affected by this buff.",
+      "$ref": "common.schema.json#/$defs/ReferenceList"
+    }
+  },
+  "unevaluatedProperties": false
+}

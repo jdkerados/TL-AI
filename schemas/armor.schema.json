@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tl-ai.local/schemas/armor.schema.json",
+  "title": "Armor",
+  "description": "Armor item specification. Stored under specifications/items/armor/.",
+  "allOf": [
+    {
+      "$ref": "item.schema.json"
+    }
+  ],
+  "properties": {
+    "id": {
+      "pattern": "^tl\\.armor\\.[a-z0-9_]+$"
+    },
+    "type": {
+      "const": "Armor"
+    }
+  },
+  "unevaluatedProperties": false
+}

@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tl-ai.local/schemas/npc.schema.json",
+  "title": "Npc",
+  "description": "NPC specification. Stored under specifications/npc/.",
+  "allOf": [
+    {
+      "$ref": "entity.schema.json"
+    }
+  ],
+  "properties": {
+    "id": {
+      "pattern": "^tl\\.npc\\.[a-z0-9_]+$"
+    },
+    "type": {
+      "const": "Npc"
+    }
+  },
+  "unevaluatedProperties": false
+}

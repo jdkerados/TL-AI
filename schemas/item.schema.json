@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tl-ai.local/schemas/item.schema.json",
+  "title": "Item",
+  "description": "Base schema for items. Weapon, Armor, and Accessory extend this schema.",
+  "allOf": [
+    {
+      "$ref": "entity.schema.json"
+    }
+  ],
+  "properties": {
+    "id": {
+      "pattern": "^tl\\.(item|weapon|armor|accessory)\\.[a-z0-9_]+$"
+    },
+    "type": {
+      "enum": ["Item", "Weapon", "Armor", "Accessory"]
+    },
+    "traits": {
+      "description": "References to Trait entities applicable to this item.",
+      "$ref": "common.schema.json#/$defs/ReferenceList"
+    },
+    "sets": {
+      "description": "References to Set entities this item belongs to.",
+      "$ref": "common.schema.json#/$defs/ReferenceList"
+    }
+  },
+  "unevaluatedProperties": false
+}

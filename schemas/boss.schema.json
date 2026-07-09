@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tl-ai.local/schemas/boss.schema.json",
+  "title": "Boss",
+  "description": "Boss specification. Stored under specifications/bosses/.",
+  "allOf": [
+    {
+      "$ref": "monster.schema.json"
+    }
+  ],
+  "properties": {
+    "id": {
+      "pattern": "^tl\\.boss\\.[a-z0-9_]+$"
+    },
+    "type": {
+      "const": "Boss"
+    }
+  },
+  "unevaluatedProperties": false
+}

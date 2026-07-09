@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tl-ai.local/schemas/event.schema.json",
+  "title": "Event",
+  "description": "Event specification, consumed by the Event Driven Simulator. Stored under specifications/events/.",
+  "allOf": [
+    {
+      "$ref": "entity.schema.json"
+    }
+  ],
+  "properties": {
+    "id": {
+      "pattern": "^tl\\.event\\.[a-z0-9_]+$"
+    },
+    "type": {
+      "const": "Event"
+    }
+  },
+  "unevaluatedProperties": false
+}

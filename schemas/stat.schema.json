@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tl-ai.local/schemas/stat.schema.json",
+  "title": "Stat",
+  "description": "Stat definition. Stored under specifications/stats/.",
+  "allOf": [
+    {
+      "$ref": "entity.schema.json"
+    }
+  ],
+  "properties": {
+    "id": {
+      "pattern": "^tl\\.stat\\.[a-z0-9_]+$"
+    },
+    "type": {
+      "const": "Stat"
+    }
+  },
+  "unevaluatedProperties": false
+}

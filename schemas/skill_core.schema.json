@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tl-ai.local/schemas/skill_core.schema.json",
+  "title": "SkillCore",
+  "description": "Skill core specification. Stored under specifications/skill_cores/.",
+  "allOf": [
+    {
+      "$ref": "entity.schema.json"
+    }
+  ],
+  "properties": {
+    "id": {
+      "pattern": "^tl\\.skill_core\\.[a-z0-9_]+$"
+    },
+    "type": {
+      "const": "SkillCore"
+    },
+    "skills": {
+      "description": "References to Skill entities this core applies to.",
+      "$ref": "common.schema.json#/$defs/ReferenceList"
+    }
+  },
+  "unevaluatedProperties": false
+}

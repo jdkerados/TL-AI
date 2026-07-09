@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tl-ai.local/schemas/trait.schema.json",
+  "title": "Trait",
+  "description": "Trait specification. Stored under specifications/traits/.",
+  "allOf": [
+    {
+      "$ref": "entity.schema.json"
+    }
+  ],
+  "properties": {
+    "id": {
+      "pattern": "^tl\\.trait\\.[a-z0-9_]+$"
+    },
+    "type": {
+      "const": "Trait"
+    },
+    "stats": {
+      "description": "References to Stat entities affected by this trait.",
+      "$ref": "common.schema.json#/$defs/ReferenceList"
+    }
+  },
+  "unevaluatedProperties": false
+}

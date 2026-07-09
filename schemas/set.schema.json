@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tl-ai.local/schemas/set.schema.json",
+  "title": "Set",
+  "description": "Item set specification. Stored under specifications/sets/.",
+  "allOf": [
+    {
+      "$ref": "entity.schema.json"
+    }
+  ],
+  "properties": {
+    "id": {
+      "pattern": "^tl\\.set\\.[a-z0-9_]+$"
+    },
+    "type": {
+      "const": "Set"
+    },
+    "members": {
+      "description": "References to Item entities belonging to this set.",
+      "$ref": "common.schema.json#/$defs/ReferenceList"
+    }
+  },
+  "unevaluatedProperties": false
+}

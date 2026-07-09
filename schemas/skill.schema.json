@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tl-ai.local/schemas/skill.schema.json",
+  "title": "Skill",
+  "description": "Skill specification. Stored under specifications/skills/.",
+  "allOf": [
+    {
+      "$ref": "entity.schema.json"
+    }
+  ],
+  "properties": {
+    "id": {
+      "pattern": "^tl\\.skill\\.[a-z0-9_]+$"
+    },
+    "type": {
+      "const": "Skill"
+    },
+    "buffs": {
+      "description": "References to Buff entities applied by this skill.",
+      "$ref": "common.schema.json#/$defs/ReferenceList"
+    }
+  },
+  "unevaluatedProperties": false
+}

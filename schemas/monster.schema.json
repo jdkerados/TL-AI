@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tl-ai.local/schemas/monster.schema.json",
+  "title": "Monster",
+  "description": "Monster specification. Boss extends this schema. Stored under specifications/monsters/.",
+  "allOf": [
+    {
+      "$ref": "entity.schema.json"
+    }
+  ],
+  "properties": {
+    "id": {
+      "pattern": "^tl\\.(monster|boss)\\.[a-z0-9_]+$"
+    },
+    "type": {
+      "enum": ["Monster", "Boss"]
+    },
+    "skills": {
+      "description": "References to Skill entities used by this monster.",
+      "$ref": "common.schema.json#/$defs/ReferenceList"
+    }
+  },
+  "unevaluatedProperties": false
+}

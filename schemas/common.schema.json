@@ -1,0 +1,93 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tl-ai.local/schemas/common.schema.json",
+  "title": "Common Definitions",
+  "description": "Shared definitions used by all TL-AI specification schemas. Not a standalone entity schema.",
+  "$defs": {
+    "StableId": {
+      "description": "Permanent, never-recycled identifier. Format: tl.<category>.<identifier>. Once published, an ID must never change or be reused.",
+      "type": "string",
+      "pattern": "^tl\\.[a-z_]+\\.[a-z0-9_]+$"
+    },
+    "PascalCaseName": {
+      "description": "Human-readable entity name in PascalCase.",
+      "type": "string",
+      "pattern": "^[A-Z][A-Za-z0-9]*$",
+      "minLength": 1,
+      "maxLength": 120
+    },
+    "SemanticVersion": {
+      "description": "Specification version (semver MAJOR.MINOR.PATCH). Published specifications are immutable: any change requires a new version.",
+      "type": "string",
+      "pattern": "^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)$"
+    },
+    "GamePatch": {
+      "description": "Throne & Liberty game patch this specification applies to.",
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+(\\.\\d+)?$"
+    },
+    "Metadata": {
+      "description": "Authoring and provenance metadata.",
+      "type": "object",
+      "properties": {
+        "createdAt": {
+          "description": "Creation date (ISO 8601).",
+          "type": "string",
+          "format": "date"
+        },
+        "updatedAt": {
+          "description": "Last update date (ISO 8601).",
+          "type": "string",
+          "format": "date"
+        },
+        "author": {
+          "description": "Author of the specification.",
+          "type": "string",
+          "minLength": 1
+        },
+        "source": {
+          "description": "Provenance of the data (URL or description).",
+          "type": "string",
+          "minLength": 1
+        },
+        "status": {
+          "description": "Position in the Staging + Validation workflow.",
+          "type": "string",
+          "enum": ["staging", "validated"]
+        },
+        "tags": {
+          "description": "Free-form classification tags.",
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "notes": {
+          "description": "Free-form notes.",
+          "type": "string"
+        }
+      },
+      "required": ["createdAt", "status"],
+      "additionalProperties": false
+    },
+    "Reference": {
+      "description": "Reference to another entity by its stable ID.",
+      "$ref": "#/$defs/StableId"
+    },
+    "ReferenceList": {
+      "description": "List of references to other entities by stable ID.",
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/Reference"
+      },
+      "uniqueItems": true
+    },
+    "LocalizationKey": {
+      "description": "Key into the localization catalog (specifications/localization/).",
+      "type": "string",
+      "pattern": "^[a-z0-9_.]+$"
+    }
+  }
+}

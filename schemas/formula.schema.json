@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tl-ai.local/schemas/formula.schema.json",
+  "title": "Formula",
+  "description": "Mathematical formula specification, consumed by the Mathematical Engine. Stored under specifications/formulas/.",
+  "allOf": [
+    {
+      "$ref": "entity.schema.json"
+    }
+  ],
+  "properties": {
+    "id": {
+      "pattern": "^tl\\.formula\\.[a-z0-9_]+$"
+    },
+    "type": {
+      "const": "Formula"
+    },
+    "inputs": {
+      "description": "References to Stat entities used as inputs.",
+      "$ref": "common.schema.json#/$defs/ReferenceList"
+    },
+    "outputs": {
+      "description": "References to Stat entities produced as outputs.",
+      "$ref": "common.schema.json#/$defs/ReferenceList"
+    }
+  },
+  "unevaluatedProperties": false
+}

@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tl-ai.local/schemas/accessory.schema.json",
+  "title": "Accessory",
+  "description": "Accessory item specification. Stored under specifications/items/accessories/.",
+  "allOf": [
+    {
+      "$ref": "item.schema.json"
+    }
+  ],
+  "properties": {
+    "id": {
+      "pattern": "^tl\\.accessory\\.[a-z0-9_]+$"
+    },
+    "type": {
+      "const": "Accessory"
+    }
+  },
+  "unevaluatedProperties": false
+}
