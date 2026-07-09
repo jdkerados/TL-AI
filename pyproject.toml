@@ -19,6 +19,7 @@ dependencies = [
 
 [project.scripts]
 tl-ai = "tl_compiler.cli.main:run"
+tl-importer = "tl_importer.cli.main:run"
 
 [tool.hatch.build.targets.wheel]
 packages = [
@@ -26,6 +27,7 @@ packages = [
     "src/tl_database",
     "src/tl_api",
     "src/tl_compiler",
+    "src/tl_importer",
     "src/tl_simulator",
     "src/tl_studio",
     "src/tl_lab",
@@ -69,6 +71,7 @@ packages = [
     "tl_database",
     "tl_api",
     "tl_compiler",
+    "tl_importer",
     "tl_simulator",
     "tl_studio",
     "tl_lab",
