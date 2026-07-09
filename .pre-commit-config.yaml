@@ -25,3 +25,7 @@ repos:
     hooks:
       - id: mypy
         files: ^src/
+        additional_dependencies:
+          - sqlalchemy
+          - alembic
+          - pgvector
