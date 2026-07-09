@@ -1,3 +1,7 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
 [project]
 name = "tl-ai"
 version = "0.1.0"
@@ -6,9 +10,26 @@ readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
     "alembic>=1.18.5",
+    "jsonschema>=4.26.0",
     "pgvector>=0.5.0",
     "psycopg[binary]>=3.3.4",
+    "pyyaml>=6.0.3",
     "sqlalchemy>=2.0.51",
+]
+
+[project.scripts]
+tl-ai = "tl_compiler.cli.main:run"
+
+[tool.hatch.build.targets.wheel]
+packages = [
+    "src/tl_core",
+    "src/tl_database",
+    "src/tl_api",
+    "src/tl_compiler",
+    "src/tl_simulator",
+    "src/tl_studio",
+    "src/tl_lab",
+    "src/tl_common",
 ]
 
 [dependency-groups]
@@ -19,6 +40,8 @@ dev = [
     "pytest",
     "pytest-cov",
     "pre-commit",
+    "types-pyyaml>=6.0.12.20260518",
+    "types-jsonschema>=4.26.0.20260518",
 ]
 
 [tool.ruff]

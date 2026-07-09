@@ -29,3 +29,7 @@ repos:
           - sqlalchemy
           - alembic
           - pgvector
+          - jsonschema
+          - referencing
+          - types-jsonschema
+          - types-pyyaml
