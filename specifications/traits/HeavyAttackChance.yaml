@@ -1,0 +1,15 @@
+id: tl.trait.heavy_attack_chance
+type: Trait
+name: HeavyAttackChance
+description: "Heavy Attack Chance trait: increases the chance to deal heavy attacks."
+rarity: Epic
+version: 1.0.0
+patch: "1.2"
+metadata:
+  createdAt: "2026-07-10"
+  author: TL-AI Team
+  source: manually curated
+  status: validated
+  tags:
+    - epic
+    - offense

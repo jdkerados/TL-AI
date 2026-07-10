@@ -146,6 +146,7 @@ class DatabaseImporter:
             return
         meta = {
             "specification": entity.payload.get("metadata", {}),
+            "rarity": entity.payload.get("rarity"),
             "references": list(entity.references),
         }
         existing = session.scalar(select(Entity).where(Entity.stable_id == entity.stable_id))

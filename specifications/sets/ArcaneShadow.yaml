@@ -1,0 +1,18 @@
+id: tl.set.arcane_shadow
+type: Set
+name: ArcaneShadow
+description: "Arcane Shadow set — Epic cloth armor set bonus."
+rarity: Epic
+version: 1.0.0
+patch: "1.2"
+metadata:
+  createdAt: "2026-07-10"
+  author: TL-AI Team
+  source: manually curated
+  status: validated
+  tags:
+    - epic
+    - cloth
+members:
+  - tl.armor.arcane_shadow_robes
+  - tl.armor.arcane_shadow_hat

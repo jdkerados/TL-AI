@@ -1,0 +1,17 @@
+id: tl.weapon.resistance_greatsword
+type: Weapon
+name: ResistanceGreatsword
+description: "Resistance Greatsword — Heroic crafted greatsword of the Resistance."
+rarity: Heroic
+version: 1.0.0
+patch: "1.2"
+metadata:
+  createdAt: "2026-07-10"
+  author: TL-AI Team
+  source: manually curated
+  status: validated
+  tags:
+    - heroic
+    - greatsword
+traits:
+  - tl.trait.heavy_attack_chance

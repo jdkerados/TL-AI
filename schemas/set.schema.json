@@ -15,10 +15,14 @@
     "type": {
       "const": "Set"
     },
+    "rarity": {
+      "$ref": "common.schema.json#/$defs/Rarity"
+    },
     "members": {
       "description": "References to Item entities belonging to this set.",
       "$ref": "common.schema.json#/$defs/ReferenceList"
     }
   },
+  "required": ["rarity"],
   "unevaluatedProperties": false
 }

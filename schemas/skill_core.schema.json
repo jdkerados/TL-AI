@@ -15,10 +15,14 @@
     "type": {
       "const": "SkillCore"
     },
+    "rarity": {
+      "$ref": "common.schema.json#/$defs/Rarity"
+    },
     "skills": {
       "description": "References to Skill entities this core applies to.",
       "$ref": "common.schema.json#/$defs/ReferenceList"
     }
   },
+  "required": ["rarity"],
   "unevaluatedProperties": false
 }

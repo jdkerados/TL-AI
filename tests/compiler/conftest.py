@@ -10,6 +10,7 @@ VALID_TRAIT = """\
 id: tl.trait.test_trait
 type: Trait
 name: TestTrait
+rarity: Epic
 version: 1.0.0
 patch: "1.0"
 metadata:
@@ -22,6 +23,7 @@ id: tl.weapon.test_sword
 type: Weapon
 name: TestSword
 description: A test weapon.
+rarity: Epic
 version: 1.0.0
 patch: "1.0"
 metadata:

@@ -1,0 +1,20 @@
+id: tl.armor.arcane_shadow_hat
+type: Armor
+name: ArcaneShadowHat
+description: "Arcane Shadow Hat — Epic cloth head armor of the Arcane Shadow set."
+rarity: Epic
+version: 1.0.0
+patch: "1.2"
+metadata:
+  createdAt: "2026-07-10"
+  author: TL-AI Team
+  source: manually curated
+  status: validated
+  tags:
+    - epic
+    - cloth
+    - head
+traits:
+  - tl.trait.cooldown_speed
+sets:
+  - tl.set.arcane_shadow

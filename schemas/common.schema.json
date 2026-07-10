@@ -72,6 +72,11 @@
       "required": ["createdAt", "status"],
       "additionalProperties": false
     },
+    "Rarity": {
+      "description": "Content rarity. Milestone M1 supports Epic and Heroic content only.",
+      "type": "string",
+      "enum": ["Epic", "Heroic"]
+    },
     "Reference": {
       "description": "Reference to another entity by its stable ID.",
       "$ref": "#/$defs/StableId"

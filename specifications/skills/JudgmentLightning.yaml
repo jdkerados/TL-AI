@@ -1,0 +1,15 @@
+id: tl.skill.judgment_lightning
+type: Skill
+name: JudgmentLightning
+description: "Judgment Lightning — Epic staff skill: calls down a bolt of lightning."
+rarity: Epic
+version: 1.0.0
+patch: "1.2"
+metadata:
+  createdAt: "2026-07-10"
+  author: TL-AI Team
+  source: manually curated
+  status: validated
+  tags:
+    - epic
+    - staff

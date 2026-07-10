@@ -21,6 +21,7 @@ dependencies = [
 tl-ai = "tl_compiler.cli.main:run"
 tl-importer = "tl_importer.cli.main:run"
 tl-import = "tl_importer.cli.import_main:run"
+tl-stats = "tl_importer.statistics:run"
 
 [tool.hatch.build.targets.wheel]
 packages = [

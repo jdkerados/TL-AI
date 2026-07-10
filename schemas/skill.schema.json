@@ -15,10 +15,14 @@
     "type": {
       "const": "Skill"
     },
+    "rarity": {
+      "$ref": "common.schema.json#/$defs/Rarity"
+    },
     "buffs": {
       "description": "References to Buff entities applied by this skill.",
       "$ref": "common.schema.json#/$defs/ReferenceList"
     }
   },
+  "required": ["rarity"],
   "unevaluatedProperties": false
 }

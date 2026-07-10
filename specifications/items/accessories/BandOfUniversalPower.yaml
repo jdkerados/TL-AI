@@ -1,0 +1,17 @@
+id: tl.accessory.band_of_universal_power
+type: Accessory
+name: BandOfUniversalPower
+description: "Band of Universal Power — Epic ring."
+rarity: Epic
+version: 1.0.0
+patch: "1.2"
+metadata:
+  createdAt: "2026-07-10"
+  author: TL-AI Team
+  source: manually curated
+  status: validated
+  tags:
+    - epic
+    - ring
+traits:
+  - tl.trait.critical_hit_chance

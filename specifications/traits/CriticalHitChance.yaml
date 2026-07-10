@@ -1,0 +1,15 @@
+id: tl.trait.critical_hit_chance
+type: Trait
+name: CriticalHitChance
+description: "Critical Hit Chance trait: increases the chance to land critical hits."
+rarity: Epic
+version: 1.0.0
+patch: "1.2"
+metadata:
+  createdAt: "2026-07-10"
+  author: TL-AI Team
+  source: manually curated
+  status: validated
+  tags:
+    - epic
+    - offense

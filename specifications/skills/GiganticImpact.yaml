@@ -1,0 +1,15 @@
+id: tl.skill.gigantic_impact
+type: Skill
+name: GiganticImpact
+description: "Gigantic Impact — Epic greatsword skill: a devastating overhead slam."
+rarity: Epic
+version: 1.0.0
+patch: "1.2"
+metadata:
+  createdAt: "2026-07-10"
+  author: TL-AI Team
+  source: manually curated
+  status: validated
+  tags:
+    - epic
+    - greatsword

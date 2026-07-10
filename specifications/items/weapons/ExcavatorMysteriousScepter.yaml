@@ -1,0 +1,18 @@
+id: tl.weapon.excavator_mysterious_scepter
+type: Weapon
+name: ExcavatorMysteriousScepter
+description: "Excavator's Mysterious Scepter — Epic wand dropped by the world boss Excavator-9."
+rarity: Epic
+version: 1.0.0
+patch: "1.2"
+metadata:
+  createdAt: "2026-07-10"
+  author: TL-AI Team
+  source: manually curated
+  status: validated
+  tags:
+    - epic
+    - wand
+traits:
+  - tl.trait.max_health
+  - tl.trait.mana_regen

@@ -15,10 +15,14 @@
     "type": {
       "const": "Trait"
     },
+    "rarity": {
+      "$ref": "common.schema.json#/$defs/Rarity"
+    },
     "stats": {
       "description": "References to Stat entities affected by this trait.",
       "$ref": "common.schema.json#/$defs/ReferenceList"
     }
   },
+  "required": ["rarity"],
   "unevaluatedProperties": false
 }

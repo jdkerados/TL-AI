@@ -10,6 +10,7 @@ VALID_TRAIT = """\
 id: tl.trait.t009_trait
 type: Trait
 name: ImportTrait
+rarity: Heroic
 version: 1.0.0
 patch: "1.0"
 metadata:
@@ -22,6 +23,7 @@ id: tl.weapon.t009_sword
 type: Weapon
 name: ImportSword
 description: An imported test weapon.
+rarity: Epic
 version: 1.0.0
 patch: "1.0"
 metadata:

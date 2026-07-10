@@ -1,0 +1,17 @@
+id: tl.accessory.gilded_infernal_wristlet
+type: Accessory
+name: GildedInfernalWristlet
+description: "Gilded Infernal Wristlet — Epic bracelet."
+rarity: Epic
+version: 1.0.0
+patch: "1.2"
+metadata:
+  createdAt: "2026-07-10"
+  author: TL-AI Team
+  source: manually curated
+  status: validated
+  tags:
+    - epic
+    - bracelet
+traits:
+  - tl.trait.attack_speed

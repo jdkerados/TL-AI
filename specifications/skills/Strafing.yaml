@@ -1,0 +1,15 @@
+id: tl.skill.strafing
+type: Skill
+name: Strafing
+description: "Strafing — Heroic longbow skill: rapid volley while repositioning."
+rarity: Heroic
+version: 1.0.0
+patch: "1.2"
+metadata:
+  createdAt: "2026-07-10"
+  author: TL-AI Team
+  source: manually curated
+  status: validated
+  tags:
+    - heroic
+    - longbow

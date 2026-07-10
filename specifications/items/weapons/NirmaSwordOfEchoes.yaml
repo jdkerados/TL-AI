@@ -1,0 +1,18 @@
+id: tl.weapon.nirma_sword_of_echoes
+type: Weapon
+name: NirmaSwordOfEchoes
+description: "Nirma's Sword of Echoes — Epic sword dropped by the world boss Nirma."
+rarity: Epic
+version: 1.0.0
+patch: "1.2"
+metadata:
+  createdAt: "2026-07-10"
+  author: TL-AI Team
+  source: manually curated
+  status: validated
+  tags:
+    - epic
+    - sword
+traits:
+  - tl.trait.hit_chance
+  - tl.trait.cooldown_speed

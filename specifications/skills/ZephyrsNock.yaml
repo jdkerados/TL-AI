@@ -1,0 +1,15 @@
+id: tl.skill.zephyrs_nock
+type: Skill
+name: ZephyrsNock
+description: "Zephyr's Nock — Epic longbow skill: empowers the next shots with wind."
+rarity: Epic
+version: 1.0.0
+patch: "1.2"
+metadata:
+  createdAt: "2026-07-10"
+  author: TL-AI Team
+  source: manually curated
+  status: validated
+  tags:
+    - epic
+    - longbow

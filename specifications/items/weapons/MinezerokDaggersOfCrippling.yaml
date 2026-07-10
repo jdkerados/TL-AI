@@ -1,0 +1,18 @@
+id: tl.weapon.minezerok_daggers_of_crippling
+type: Weapon
+name: MinezerokDaggersOfCrippling
+description: "Minezerok's Daggers of Crippling — Epic daggers dropped by the world boss Minezerok."
+rarity: Epic
+version: 1.0.0
+patch: "1.2"
+metadata:
+  createdAt: "2026-07-10"
+  author: TL-AI Team
+  source: manually curated
+  status: validated
+  tags:
+    - epic
+    - dagger
+traits:
+  - tl.trait.critical_hit_chance
+  - tl.trait.melee_evasion
