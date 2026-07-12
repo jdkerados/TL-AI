@@ -1,12 +1,36 @@
 id: tl.armor.resistance_leather_boots
 type: Armor
-name: ResistanceLeatherBoots
-description: "Resistance Leather Boots — Heroic crafted leather boots of the Resistance."
+internalName: ResistanceLeatherBoots
+displayName: Resistance Leather Boots
+localizationKey: armor.resistance_leather_boots
+description: Heroic crafted leather boots of the Resistance. Mobile boots with melee evasion.
 rarity: Heroic
-version: 1.0.0
+armorType: Leather
+slot: Feet
+itemLevel: 55
+requirement:
+  requiredLevel: 45
+baseStats:
+  - attribute: Defense
+    modifier: Flat
+    value: 95
+  - attribute: MagicDefense
+    modifier: Flat
+    value: 95
+  - attribute: MeleeEvasion
+    modifier: Flat
+    value: 70
+traitPool:
+  - tl.trait.melee_evasion
+  - tl.trait.max_health
+maxTraitSlots: 2
+acquisition:
+  - sourceType: Crafting
+version: 2.0.0
 patch: "1.2"
 metadata:
   createdAt: "2026-07-10"
+  updatedAt: "2026-07-10"
   author: TL-AI Team
   source: manually curated
   status: validated
@@ -14,5 +38,3 @@ metadata:
     - heroic
     - leather
     - boots
-traits:
-  - tl.trait.melee_evasion

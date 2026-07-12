@@ -1,12 +1,31 @@
 id: tl.skill.strafing
 type: Skill
-name: Strafing
-description: "Strafing — Heroic longbow skill: rapid volley while repositioning."
+internalName: Strafing
+displayName: Strafing
+localizationKey: skill.strafing
+description: Heroic longbow skill. A rapid volley of arrows fired while repositioning.
 rarity: Heroic
-version: 1.0.0
+skillType: Active
+weaponType: Longbow
+timing:
+  castTime: 0
+  cooldown: 9
+cost:
+  - resource: Mana
+    amount: 45
+targeting:
+  targetType: Enemy
+  range: 20
+damage:
+  baseDamage: 120
+  scalingAttribute: Attack
+  scalingRatio: 95
+  damageSchool: Physical
+version: 2.0.0
 patch: "1.2"
 metadata:
   createdAt: "2026-07-10"
+  updatedAt: "2026-07-10"
   author: TL-AI Team
   source: manually curated
   status: validated

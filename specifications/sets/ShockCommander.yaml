@@ -1,18 +1,30 @@
 id: tl.set.shock_commander
-type: Set
-name: ShockCommander
-description: "Shock Commander set — Epic plate armor set bonus."
+type: SetBonus
+internalName: ShockCommander
+displayName: Shock Commander
+localizationKey: set.shock_commander
+description: Epic plate armor set bonus for frontline fighters. Grants health and melee endurance with more pieces equipped.
 rarity: Epic
-version: 1.0.0
+members:
+  - tl.armor.shock_commander_plate_armor
+  - tl.armor.shock_commander_sabatons
+bonuses:
+  - pieces: 2
+    modifiers:
+      - attribute: Health
+        modifier: Flat
+        value: 420
+      - attribute: MeleeEndurance
+        modifier: Flat
+        value: 100
+version: 2.0.0
 patch: "1.2"
 metadata:
   createdAt: "2026-07-10"
+  updatedAt: "2026-07-10"
   author: TL-AI Team
   source: manually curated
   status: validated
   tags:
     - epic
     - plate
-members:
-  - tl.armor.shock_commander_plate_armor
-  - tl.armor.shock_commander_sabatons

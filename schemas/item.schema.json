@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://tl-ai.local/schemas/item.schema.json",
   "title": "Item",
-  "description": "Base schema for items. Weapon, Armor, and Accessory extend this schema.",
+  "description": "Base schema for items (Entity Model V2). Weapon, Armor, and Accessory extend this schema.",
   "allOf": [
     {
       "$ref": "entity.schema.json"
@@ -10,23 +10,48 @@
   ],
   "properties": {
     "id": {
-      "pattern": "^tl\\.(item|weapon|armor|accessory)\\.[a-z0-9_]+$"
+      "pattern": "^tl\\.(weapon|armor|accessory)\\.[a-z0-9_]+$"
     },
     "type": {
-      "enum": ["Item", "Weapon", "Armor", "Accessory"]
+      "enum": ["Weapon", "Armor", "Accessory"]
     },
     "rarity": {
       "$ref": "common.schema.json#/$defs/Rarity"
     },
-    "traits": {
-      "description": "References to Trait entities applicable to this item.",
-      "$ref": "common.schema.json#/$defs/ReferenceList"
+    "itemLevel": {
+      "description": "Item level / gear score contribution.",
+      "type": "integer",
+      "minimum": 1
     },
-    "sets": {
-      "description": "References to Set entities this item belongs to.",
-      "$ref": "common.schema.json#/$defs/ReferenceList"
+    "tier": {
+      "description": "Item tier for tiered variants (e.g. T2 archboss gear).",
+      "type": "integer",
+      "minimum": 1
+    },
+    "requirement": {
+      "$ref": "common.schema.json#/$defs/Requirement"
+    },
+    "baseStats": {
+      "description": "Strongly typed base stats of the item.",
+      "$ref": "common.schema.json#/$defs/StatModifierList"
+    },
+    "traitPool": {
+      "description": "Traits that can roll on this item (typed references).",
+      "type": "array",
+      "items": { "$ref": "common.schema.json#/$defs/TraitReference" },
+      "uniqueItems": true
+    },
+    "maxTraitSlots": {
+      "description": "Maximum number of unlockable trait slots.",
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 5
+    },
+    "acquisition": {
+      "description": "How this item is obtained.",
+      "type": "array",
+      "items": { "$ref": "common.schema.json#/$defs/DropSource" }
     }
   },
-  "required": ["rarity"],
-  "unevaluatedProperties": false
+  "required": ["rarity", "itemLevel", "baseStats", "traitPool", "maxTraitSlots"]
 }

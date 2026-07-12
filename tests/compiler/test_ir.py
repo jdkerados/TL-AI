@@ -17,8 +17,10 @@ def test_ir_entity_fields(specs_dir: Path) -> None:
     ir = build_ir(load_specifications(specs_dir))
     weapon = ir.by_id()["tl.weapon.test_sword"]
     assert weapon.entity_type == "Weapon"
-    assert weapon.name == "TestSword"
-    assert weapon.version == "1.0.0"
+    assert weapon.internal_name == "TestSword"
+    assert weapon.display_name == "Test Sword"
+    assert weapon.rarity == "Epic"
+    assert weapon.version == "2.0.0"
     assert weapon.patch == "1.0"
     assert weapon.status == "staging"
     assert weapon.source_path == "items/weapons/TestSword.yaml"

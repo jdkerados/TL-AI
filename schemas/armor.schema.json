@@ -2,10 +2,21 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://tl-ai.local/schemas/armor.schema.json",
   "title": "Armor",
-  "description": "Armor item specification. Stored under specifications/items/armor/.",
+  "description": "Armor item specification (Entity Model V2). Stored under specifications/items/armor/.",
   "allOf": [
     {
       "$ref": "item.schema.json"
+    },
+    {
+      "properties": {
+        "baseStats": {
+          "contains": {
+            "type": "object",
+            "properties": { "attribute": { "const": "Defense" } },
+            "required": ["attribute"]
+          }
+        }
+      }
     }
   ],
   "properties": {
@@ -14,7 +25,14 @@
     },
     "type": {
       "const": "Armor"
+    },
+    "armorType": {
+      "$ref": "common.schema.json#/$defs/ArmorType"
+    },
+    "slot": {
+      "$ref": "common.schema.json#/$defs/ArmorSlot"
     }
   },
+  "required": ["armorType", "slot"],
   "unevaluatedProperties": false
 }

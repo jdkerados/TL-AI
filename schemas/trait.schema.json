@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://tl-ai.local/schemas/trait.schema.json",
   "title": "Trait",
-  "description": "Trait specification. Stored under specifications/traits/.",
+  "description": "Trait specification (Entity Model V2). Stored under specifications/traits/.",
   "allOf": [
     {
       "$ref": "entity.schema.json"
@@ -18,11 +18,23 @@
     "rarity": {
       "$ref": "common.schema.json#/$defs/Rarity"
     },
-    "stats": {
-      "description": "References to Stat entities affected by this trait.",
-      "$ref": "common.schema.json#/$defs/ReferenceList"
+    "traitCategory": {
+      "$ref": "common.schema.json#/$defs/TraitCategory"
+    },
+    "appliesTo": {
+      "description": "Item kinds this trait can roll on.",
+      "type": "array",
+      "items": { "type": "string", "enum": ["Weapon", "Armor", "Accessory"] },
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "effects": {
+      "description": "Strongly typed effects scaling with the carrying item's rarity.",
+      "type": "array",
+      "items": { "$ref": "common.schema.json#/$defs/RarityScaledModifier" },
+      "minItems": 1
     }
   },
-  "required": ["rarity"],
+  "required": ["rarity", "traitCategory", "appliesTo", "effects"],
   "unevaluatedProperties": false
 }

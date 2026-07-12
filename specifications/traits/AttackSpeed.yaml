@@ -1,12 +1,25 @@
 id: tl.trait.attack_speed
 type: Trait
-name: AttackSpeed
-description: "Attack Speed trait: increases basic attack speed."
+internalName: AttackSpeed
+displayName: Attack Speed
+localizationKey: trait.attack_speed
+description: Increases the basic attack speed of the carrying item's wearer.
 rarity: Epic
-version: 1.0.0
+traitCategory: Offense
+appliesTo:
+  - Weapon
+  - Accessory
+effects:
+  - attribute: AttackSpeedBoost
+    modifier: Percent
+    valuesByRarity:
+      Epic: 7.5
+      Heroic: 5.25
+version: 2.0.0
 patch: "1.2"
 metadata:
   createdAt: "2026-07-10"
+  updatedAt: "2026-07-10"
   author: TL-AI Team
   source: manually curated
   status: validated

@@ -1,12 +1,33 @@
 id: tl.skill.curse_explosion
 type: Skill
-name: CurseExplosion
-description: "Curse Explosion — Epic wand skill: detonates accumulated curses."
+internalName: CurseExplosion
+displayName: Curse Explosion
+localizationKey: skill.curse_explosion
+description: Epic wand skill. Detonates accumulated curses on the target, dealing magic damage in an area.
 rarity: Epic
-version: 1.0.0
+skillType: Active
+weaponType: Wand
+timing:
+  castTime: 1
+  cooldown: 16
+cost:
+  - resource: Mana
+    amount: 95
+targeting:
+  targetType: Enemy
+  range: 18
+  areaRadius: 3
+  maxTargets: 5
+damage:
+  baseDamage: 210
+  scalingAttribute: MagicAttack
+  scalingRatio: 160
+  damageSchool: Magic
+version: 2.0.0
 patch: "1.2"
 metadata:
   createdAt: "2026-07-10"
+  updatedAt: "2026-07-10"
   author: TL-AI Team
   source: manually curated
   status: validated

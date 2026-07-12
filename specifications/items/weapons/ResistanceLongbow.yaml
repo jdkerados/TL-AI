@@ -1,17 +1,38 @@
 id: tl.weapon.resistance_longbow
 type: Weapon
-name: ResistanceLongbow
-description: "Resistance Longbow — Heroic crafted longbow of the Resistance."
+internalName: ResistanceLongbow
+displayName: Resistance Longbow
+localizationKey: weapon.resistance_longbow
+description: Heroic crafted longbow of the Resistance. Reliable ranged option with attack speed support.
 rarity: Heroic
-version: 1.0.0
+weaponType: Longbow
+itemLevel: 55
+requirement:
+  requiredLevel: 45
+baseStats:
+  - attribute: MinDamage
+    modifier: Flat
+    value: 41
+  - attribute: MaxDamage
+    modifier: Flat
+    value: 68
+  - attribute: AttackSpeed
+    modifier: Flat
+    value: 0.95
+traitPool:
+  - tl.trait.attack_speed
+  - tl.trait.critical_hit_chance
+maxTraitSlots: 2
+acquisition:
+  - sourceType: Crafting
+version: 2.0.0
 patch: "1.2"
 metadata:
   createdAt: "2026-07-10"
+  updatedAt: "2026-07-10"
   author: TL-AI Team
   source: manually curated
   status: validated
   tags:
     - heroic
     - longbow
-traits:
-  - tl.trait.attack_speed

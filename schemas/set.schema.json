@@ -1,8 +1,8 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://tl-ai.local/schemas/set.schema.json",
-  "title": "Set",
-  "description": "Item set specification. Stored under specifications/sets/.",
+  "title": "SetBonus",
+  "description": "Set bonus specification (Entity Model V2). Stored under specifications/sets/. The stable-ID category remains tl.set.* (stable IDs are immutable); the entity type is SetBonus.",
   "allOf": [
     {
       "$ref": "entity.schema.json"
@@ -13,16 +13,25 @@
       "pattern": "^tl\\.set\\.[a-z0-9_]+$"
     },
     "type": {
-      "const": "Set"
+      "const": "SetBonus"
     },
     "rarity": {
       "$ref": "common.schema.json#/$defs/Rarity"
     },
     "members": {
-      "description": "References to Item entities belonging to this set.",
-      "$ref": "common.schema.json#/$defs/ReferenceList"
+      "description": "Items belonging to this set (canonical side; items do not reference sets).",
+      "type": "array",
+      "items": { "$ref": "common.schema.json#/$defs/ItemReference" },
+      "minItems": 2,
+      "uniqueItems": true
+    },
+    "bonuses": {
+      "description": "Piece-count bonuses.",
+      "type": "array",
+      "items": { "$ref": "common.schema.json#/$defs/PieceBonus" },
+      "minItems": 1
     }
   },
-  "required": ["rarity"],
+  "required": ["rarity", "members", "bonuses"],
   "unevaluatedProperties": false
 }

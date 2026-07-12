@@ -34,7 +34,9 @@ def generate_artifacts(ir: BuildIR, specs_dir: Path, output_dir: Path) -> tuple[
             {
                 "stableId": entity.stable_id,
                 "type": entity.entity_type,
-                "name": entity.name,
+                "internalName": entity.internal_name,
+                "displayName": entity.display_name,
+                "rarity": entity.rarity,
                 "version": entity.version,
                 "patch": entity.patch,
                 "status": entity.status,

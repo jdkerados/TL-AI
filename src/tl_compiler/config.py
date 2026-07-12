@@ -34,7 +34,7 @@ CATEGORIES: tuple[Category, ...] = (
     Category("monsters", "monster.schema.json", "Monster", "monster"),
     Category("bosses", "boss.schema.json", "Boss", "boss"),
     Category("npc", "npc.schema.json", "Npc", "npc"),
-    Category("sets", "set.schema.json", "Set", "set"),
+    Category("sets", "set.schema.json", "SetBonus", "set"),
     Category("formulas", "formula.schema.json", "Formula", "formula"),
     Category("stats", "stat.schema.json", "Stat", "stat"),
     Category("events", "event.schema.json", "Event", "event"),

@@ -9,9 +9,19 @@ SCHEMAS_DIR = Path(__file__).resolve().parents[2] / "schemas"
 VALID_TRAIT = """\
 id: tl.trait.test_trait
 type: Trait
-name: TestTrait
+internalName: TestTrait
+displayName: Test Trait
+description: A test trait.
 rarity: Epic
-version: 1.0.0
+traitCategory: Offense
+appliesTo:
+  - Weapon
+effects:
+  - attribute: CriticalChance
+    modifier: Flat
+    valuesByRarity:
+      Epic: 110
+version: 2.0.0
 patch: "1.0"
 metadata:
   createdAt: "2026-07-09"
@@ -21,16 +31,27 @@ metadata:
 VALID_WEAPON = """\
 id: tl.weapon.test_sword
 type: Weapon
-name: TestSword
+internalName: TestSword
+displayName: Test Sword
 description: A test weapon.
 rarity: Epic
-version: 1.0.0
+weaponType: Sword
+itemLevel: 60
+baseStats:
+  - attribute: MinDamage
+    modifier: Flat
+    value: 10
+  - attribute: MaxDamage
+    modifier: Flat
+    value: 20
+traitPool:
+  - tl.trait.test_trait
+maxTraitSlots: 2
+version: 2.0.0
 patch: "1.0"
 metadata:
   createdAt: "2026-07-09"
   status: staging
-traits:
-  - tl.trait.test_trait
 """
 
 

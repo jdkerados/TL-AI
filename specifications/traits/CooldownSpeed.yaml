@@ -1,12 +1,26 @@
 id: tl.trait.cooldown_speed
 type: Trait
-name: CooldownSpeed
-description: "Cooldown Speed trait: reduces skill cooldowns."
+internalName: CooldownSpeed
+displayName: Cooldown Speed
+localizationKey: trait.cooldown_speed
+description: Reduces skill cooldowns of the carrying item's wearer.
 rarity: Epic
-version: 1.0.0
+traitCategory: Utility
+appliesTo:
+  - Weapon
+  - Armor
+  - Accessory
+effects:
+  - attribute: CooldownSpeed
+    modifier: Percent
+    valuesByRarity:
+      Epic: 7.3
+      Heroic: 5.1
+version: 2.0.0
 patch: "1.2"
 metadata:
   createdAt: "2026-07-10"
+  updatedAt: "2026-07-10"
   author: TL-AI Team
   source: manually curated
   status: validated

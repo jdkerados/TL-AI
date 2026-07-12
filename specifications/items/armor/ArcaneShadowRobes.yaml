@@ -1,12 +1,38 @@
 id: tl.armor.arcane_shadow_robes
 type: Armor
-name: ArcaneShadowRobes
-description: "Arcane Shadow Robes — Epic cloth chest armor of the Arcane Shadow set."
+internalName: ArcaneShadowRobes
+displayName: Arcane Shadow Robes
+localizationKey: armor.arcane_shadow_robes
+description: Epic cloth chest armor of the Arcane Shadow set. Caster chest piece with critical rating and mana sustain.
 rarity: Epic
-version: 1.0.0
+armorType: Cloth
+slot: Chest
+itemLevel: 65
+requirement:
+  requiredLevel: 50
+baseStats:
+  - attribute: Defense
+    modifier: Flat
+    value: 130
+  - attribute: MagicDefense
+    modifier: Flat
+    value: 210
+  - attribute: CriticalChance
+    modifier: Flat
+    value: 90
+traitPool:
+  - tl.trait.critical_hit_chance
+  - tl.trait.mana_regen
+  - tl.trait.cooldown_speed
+maxTraitSlots: 3
+acquisition:
+  - sourceType: BossDrop
+    dropChance: 3
+version: 2.0.0
 patch: "1.2"
 metadata:
   createdAt: "2026-07-10"
+  updatedAt: "2026-07-10"
   author: TL-AI Team
   source: manually curated
   status: validated
@@ -14,8 +40,3 @@ metadata:
     - epic
     - cloth
     - chest
-traits:
-  - tl.trait.critical_hit_chance
-  - tl.trait.mana_regen
-sets:
-  - tl.set.arcane_shadow

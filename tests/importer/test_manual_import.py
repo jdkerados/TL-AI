@@ -85,7 +85,8 @@ def test_invalid_reference_fails(specs_dir: Path, schemas_dir: Path, tmp_path: P
 def test_duplicate_stable_id_fails(specs_dir: Path, schemas_dir: Path, tmp_path: Path) -> None:
     content = (specs_dir / "traits" / "ImportTrait.yaml").read_text(encoding="utf-8")
     (specs_dir / "traits" / "ImportTraitCopy.yaml").write_text(
-        content.replace("name: ImportTrait", "name: ImportTraitCopy"), encoding="utf-8"
+        content.replace("internalName: ImportTrait", "internalName: ImportTraitCopy"),
+        encoding="utf-8",
     )
     exit_code, report, _ = _run(specs_dir, schemas_dir, tmp_path)
     assert exit_code == 1
@@ -106,7 +107,7 @@ def test_valid_sqlite_import(specs_dir: Path, schemas_dir: Path, tmp_path: Path)
         weapon = session.scalar(select(Weapon).where(Weapon.stable_id == "tl.weapon.t009_sword"))
         assert weapon is not None
         assert weapon.is_validated is True
-        assert weapon.semantic_version == "1.0.0"
+        assert weapon.semantic_version == "2.0.0"
         assert weapon.patch_version == "1.0"
         assert weapon.meta["specification"]["status"] == "validated"
         assert weapon.meta["references"] == ["tl.trait.t009_trait"]
@@ -128,7 +129,7 @@ def test_version_upgrade(specs_dir: Path, schemas_dir: Path, tmp_path: Path) -> 
     _run(specs_dir, schemas_dir, tmp_path, target)
     weapon_file = specs_dir / "items" / "weapons" / "ImportSword.yaml"
     weapon_file.write_text(
-        weapon_file.read_text(encoding="utf-8").replace("version: 1.0.0", "version: 1.1.0"),
+        weapon_file.read_text(encoding="utf-8").replace("version: 2.0.0", "version: 2.1.0"),
         encoding="utf-8",
     )
     exit_code, report, _ = _run(specs_dir, schemas_dir, tmp_path, target)
@@ -136,14 +137,14 @@ def test_version_upgrade(specs_dir: Path, schemas_dir: Path, tmp_path: Path) -> 
     databases = report["databases"]
     assert isinstance(databases, list)
     assert databases[0]["updated"] == 1
-    assert _weapon_version(target.url) == "1.1.0"
+    assert _weapon_version(target.url) == "2.1.0"
 
 
 def test_version_downgrade_rejected(specs_dir: Path, schemas_dir: Path, tmp_path: Path) -> None:
     target = _sqlite_target(tmp_path)
     weapon_file = specs_dir / "items" / "weapons" / "ImportSword.yaml"
     original = weapon_file.read_text(encoding="utf-8")
-    weapon_file.write_text(original.replace("version: 1.0.0", "version: 2.0.0"), encoding="utf-8")
+    weapon_file.write_text(original.replace("version: 2.0.0", "version: 3.0.0"), encoding="utf-8")
     _run(specs_dir, schemas_dir, tmp_path, target)
     weapon_file.write_text(original, encoding="utf-8")
     exit_code, report, _ = _run(specs_dir, schemas_dir, tmp_path, target)
@@ -151,7 +152,7 @@ def test_version_downgrade_rejected(specs_dir: Path, schemas_dir: Path, tmp_path
     databases = report["databases"]
     assert isinstance(databases, list)
     assert databases[0]["rejectedDowngrades"] == 1
-    assert _weapon_version(target.url) == "2.0.0"
+    assert _weapon_version(target.url) == "3.0.0"
 
 
 def test_validate_only_touches_no_database(
@@ -185,7 +186,7 @@ def test_cli_sqlite_import(specs_dir: Path, schemas_dir: Path, tmp_path: Path) -
     assert exit_code == 0
     report = json.loads(report_path.read_text(encoding="utf-8"))
     assert report["databases"][0]["inserted"] == 2
-    assert _weapon_version(sqlite_url) == "1.0.0"
+    assert _weapon_version(sqlite_url) == "2.0.0"
 
 
 def _postgres_available() -> bool:

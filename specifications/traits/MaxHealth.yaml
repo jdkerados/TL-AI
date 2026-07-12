@@ -1,12 +1,26 @@
 id: tl.trait.max_health
 type: Trait
-name: MaxHealth
-description: "Max Health trait: increases maximum health."
+internalName: MaxHealth
+displayName: Max Health
+localizationKey: trait.max_health
+description: Increases the maximum health of the carrying item's wearer.
 rarity: Epic
-version: 1.0.0
+traitCategory: Defense
+appliesTo:
+  - Weapon
+  - Armor
+  - Accessory
+effects:
+  - attribute: Health
+    modifier: Flat
+    valuesByRarity:
+      Epic: 700
+      Heroic: 490
+version: 2.0.0
 patch: "1.2"
 metadata:
   createdAt: "2026-07-10"
+  updatedAt: "2026-07-10"
   author: TL-AI Team
   source: manually curated
   status: validated

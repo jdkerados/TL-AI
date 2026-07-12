@@ -1,12 +1,26 @@
 id: tl.trait.heavy_attack_chance
 type: Trait
-name: HeavyAttackChance
-description: "Heavy Attack Chance trait: increases the chance to deal heavy attacks."
+internalName: HeavyAttackChance
+displayName: Heavy Attack Chance
+localizationKey: trait.heavy_attack_chance
+description: Increases the heavy attack rating of the carrying item's wearer.
 rarity: Epic
-version: 1.0.0
+traitCategory: Offense
+appliesTo:
+  - Weapon
+  - Armor
+  - Accessory
+effects:
+  - attribute: HeavyAttackChance
+    modifier: Flat
+    valuesByRarity:
+      Epic: 110
+      Heroic: 90
+version: 2.0.0
 patch: "1.2"
 metadata:
   createdAt: "2026-07-10"
+  updatedAt: "2026-07-10"
   author: TL-AI Team
   source: manually curated
   status: validated

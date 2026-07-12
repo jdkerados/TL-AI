@@ -2,10 +2,32 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://tl-ai.local/schemas/weapon.schema.json",
   "title": "Weapon",
-  "description": "Weapon item specification. Stored under specifications/items/weapons/.",
+  "description": "Weapon item specification (Entity Model V2). Stored under specifications/items/weapons/.",
   "allOf": [
     {
       "$ref": "item.schema.json"
+    },
+    {
+      "properties": {
+        "baseStats": {
+          "allOf": [
+            {
+              "contains": {
+                "type": "object",
+                "properties": { "attribute": { "const": "MinDamage" } },
+                "required": ["attribute"]
+              }
+            },
+            {
+              "contains": {
+                "type": "object",
+                "properties": { "attribute": { "const": "MaxDamage" } },
+                "required": ["attribute"]
+              }
+            }
+          ]
+        }
+      }
     }
   ],
   "properties": {
@@ -14,7 +36,17 @@
     },
     "type": {
       "const": "Weapon"
+    },
+    "weaponType": {
+      "$ref": "common.schema.json#/$defs/WeaponType"
+    },
+    "grantsSkills": {
+      "description": "Skills granted by this weapon (typed references).",
+      "type": "array",
+      "items": { "$ref": "common.schema.json#/$defs/SkillReference" },
+      "uniqueItems": true
     }
   },
+  "required": ["weaponType"],
   "unevaluatedProperties": false
 }

@@ -1,12 +1,31 @@
 id: tl.skill.guillotine_blade
 type: Skill
-name: GuillotineBlade
-description: "Guillotine Blade — Heroic greatsword skill: a leaping executioner strike."
+internalName: GuillotineBlade
+displayName: Guillotine Blade
+localizationKey: skill.guillotine_blade
+description: Heroic greatsword skill. A leaping executioner strike against a single target.
 rarity: Heroic
-version: 1.0.0
+skillType: Active
+weaponType: Greatsword
+timing:
+  castTime: 0
+  cooldown: 12
+cost:
+  - resource: Mana
+    amount: 60
+targeting:
+  targetType: Enemy
+  range: 6
+damage:
+  baseDamage: 180
+  scalingAttribute: Attack
+  scalingRatio: 150
+  damageSchool: Physical
+version: 2.0.0
 patch: "1.2"
 metadata:
   createdAt: "2026-07-10"
+  updatedAt: "2026-07-10"
   author: TL-AI Team
   source: manually curated
   status: validated

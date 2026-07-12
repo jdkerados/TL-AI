@@ -1,12 +1,36 @@
 id: tl.armor.resistance_plate_gauntlets
 type: Armor
-name: ResistancePlateGauntlets
-description: "Resistance Plate Gauntlets — Heroic crafted plate gloves of the Resistance."
+internalName: ResistancePlateGauntlets
+displayName: Resistance Plate Gauntlets
+localizationKey: armor.resistance_plate_gauntlets
+description: Heroic crafted plate gloves of the Resistance. Dependable gloves with hit rating.
 rarity: Heroic
-version: 1.0.0
+armorType: Plate
+slot: Hands
+itemLevel: 55
+requirement:
+  requiredLevel: 45
+baseStats:
+  - attribute: Defense
+    modifier: Flat
+    value: 110
+  - attribute: MagicDefense
+    modifier: Flat
+    value: 80
+  - attribute: Hit
+    modifier: Flat
+    value: 60
+traitPool:
+  - tl.trait.hit_chance
+  - tl.trait.max_health
+maxTraitSlots: 2
+acquisition:
+  - sourceType: Crafting
+version: 2.0.0
 patch: "1.2"
 metadata:
   createdAt: "2026-07-10"
+  updatedAt: "2026-07-10"
   author: TL-AI Team
   source: manually curated
   status: validated
@@ -14,5 +38,3 @@ metadata:
     - heroic
     - plate
     - gloves
-traits:
-  - tl.trait.hit_chance

@@ -1,18 +1,43 @@
 id: tl.weapon.minezerok_daggers_of_crippling
 type: Weapon
-name: MinezerokDaggersOfCrippling
-description: "Minezerok's Daggers of Crippling — Epic daggers dropped by the world boss Minezerok."
+internalName: MinezerokDaggersOfCrippling
+displayName: Minezerok's Daggers of Crippling
+localizationKey: weapon.minezerok_daggers_of_crippling
+description: Epic daggers dropped by the world boss Minezerok. Very fast dual daggers with high critical rating and evasion.
 rarity: Epic
-version: 1.0.0
+weaponType: Dagger
+itemLevel: 65
+requirement:
+  requiredLevel: 50
+baseStats:
+  - attribute: MinDamage
+    modifier: Flat
+    value: 41
+  - attribute: MaxDamage
+    modifier: Flat
+    value: 68
+  - attribute: AttackSpeed
+    modifier: Flat
+    value: 0.65
+  - attribute: CriticalChance
+    modifier: Flat
+    value: 160
+traitPool:
+  - tl.trait.critical_hit_chance
+  - tl.trait.melee_evasion
+  - tl.trait.attack_speed
+maxTraitSlots: 3
+acquisition:
+  - sourceType: BossDrop
+    dropChance: 2.5
+version: 2.0.0
 patch: "1.2"
 metadata:
   createdAt: "2026-07-10"
+  updatedAt: "2026-07-10"
   author: TL-AI Team
   source: manually curated
   status: validated
   tags:
     - epic
     - dagger
-traits:
-  - tl.trait.critical_hit_chance
-  - tl.trait.melee_evasion

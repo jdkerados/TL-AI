@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://tl-ai.local/schemas/entity.schema.json",
   "title": "Entity",
-  "description": "Base schema for every TL-AI specification entity. All concrete entity schemas extend this schema via allOf.",
+  "description": "Base schema for every TL-AI specification entity (Entity Model V2 common envelope). All concrete entity schemas extend this schema via allOf.",
   "type": "object",
   "properties": {
     "id": {
@@ -13,11 +13,22 @@
       "type": "string",
       "pattern": "^[A-Z][A-Za-z0-9]*$"
     },
-    "name": {
+    "internalName": {
       "$ref": "common.schema.json#/$defs/PascalCaseName"
     },
+    "displayName": {
+      "$ref": "common.schema.json#/$defs/DisplayName"
+    },
+    "localizationKey": {
+      "$ref": "common.schema.json#/$defs/LocalizationKey"
+    },
     "description": {
-      "description": "Human-readable description of the entity.",
+      "description": "Factual, mechanical description of the entity.",
+      "type": "string",
+      "minLength": 1
+    },
+    "flavorText": {
+      "description": "In-game lore/flavor text, verbatim if it exists.",
       "type": "string"
     },
     "version": {
@@ -30,5 +41,5 @@
       "$ref": "common.schema.json#/$defs/Metadata"
     }
   },
-  "required": ["id", "type", "name", "version", "patch", "metadata"]
+  "required": ["id", "type", "internalName", "displayName", "description", "version", "patch", "metadata"]
 }

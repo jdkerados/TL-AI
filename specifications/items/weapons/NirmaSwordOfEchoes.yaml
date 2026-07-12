@@ -1,18 +1,43 @@
 id: tl.weapon.nirma_sword_of_echoes
 type: Weapon
-name: NirmaSwordOfEchoes
-description: "Nirma's Sword of Echoes — Epic sword dropped by the world boss Nirma."
+internalName: NirmaSwordOfEchoes
+displayName: Nirma's Sword of Echoes
+localizationKey: weapon.nirma_sword_of_echoes
+description: Epic sword dropped by the world boss Nirma. A balanced one-handed sword favoring hit rating and cooldown speed.
 rarity: Epic
-version: 1.0.0
+weaponType: Sword
+itemLevel: 65
+requirement:
+  requiredLevel: 50
+baseStats:
+  - attribute: MinDamage
+    modifier: Flat
+    value: 46
+  - attribute: MaxDamage
+    modifier: Flat
+    value: 76
+  - attribute: AttackSpeed
+    modifier: Flat
+    value: 0.85
+  - attribute: Hit
+    modifier: Flat
+    value: 120
+traitPool:
+  - tl.trait.hit_chance
+  - tl.trait.cooldown_speed
+  - tl.trait.max_health
+maxTraitSlots: 3
+acquisition:
+  - sourceType: BossDrop
+    dropChance: 2.5
+version: 2.0.0
 patch: "1.2"
 metadata:
   createdAt: "2026-07-10"
+  updatedAt: "2026-07-10"
   author: TL-AI Team
   source: manually curated
   status: validated
   tags:
     - epic
     - sword
-traits:
-  - tl.trait.hit_chance
-  - tl.trait.cooldown_speed

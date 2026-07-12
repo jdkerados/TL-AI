@@ -1,18 +1,43 @@
 id: tl.weapon.karnix_netherbow
 type: Weapon
-name: KarnixNetherbow
-description: "Karnix's Netherbow — Epic longbow dropped by the world boss Chief Chimera Karnix."
+internalName: KarnixNetherbow
+displayName: Karnix's Netherbow
+localizationKey: weapon.karnix_netherbow
+description: Epic longbow dropped by the world boss Chief Chimera Karnix. Fast ranged weapon with strong critical rating.
 rarity: Epic
-version: 1.0.0
+weaponType: Longbow
+itemLevel: 65
+requirement:
+  requiredLevel: 50
+baseStats:
+  - attribute: MinDamage
+    modifier: Flat
+    value: 51
+  - attribute: MaxDamage
+    modifier: Flat
+    value: 85
+  - attribute: AttackSpeed
+    modifier: Flat
+    value: 0.95
+  - attribute: CriticalChance
+    modifier: Flat
+    value: 140
+traitPool:
+  - tl.trait.critical_hit_chance
+  - tl.trait.attack_speed
+  - tl.trait.heavy_attack_chance
+maxTraitSlots: 3
+acquisition:
+  - sourceType: BossDrop
+    dropChance: 2.5
+version: 2.0.0
 patch: "1.2"
 metadata:
   createdAt: "2026-07-10"
+  updatedAt: "2026-07-10"
   author: TL-AI Team
   source: manually curated
   status: validated
   tags:
     - epic
     - longbow
-traits:
-  - tl.trait.critical_hit_chance
-  - tl.trait.attack_speed

@@ -1,12 +1,33 @@
 id: tl.skill.gigantic_impact
 type: Skill
-name: GiganticImpact
-description: "Gigantic Impact — Epic greatsword skill: a devastating overhead slam."
+internalName: GiganticImpact
+displayName: Gigantic Impact
+localizationKey: skill.gigantic_impact
+description: Epic greatsword skill. A devastating overhead slam dealing heavy physical damage to nearby enemies.
 rarity: Epic
-version: 1.0.0
+skillType: Active
+weaponType: Greatsword
+timing:
+  castTime: 0.5
+  cooldown: 18
+cost:
+  - resource: Mana
+    amount: 80
+targeting:
+  targetType: Enemy
+  range: 3
+  areaRadius: 3
+  maxTargets: 5
+damage:
+  baseDamage: 240
+  scalingAttribute: Attack
+  scalingRatio: 185
+  damageSchool: Physical
+version: 2.0.0
 patch: "1.2"
 metadata:
   createdAt: "2026-07-10"
+  updatedAt: "2026-07-10"
   author: TL-AI Team
   source: manually curated
   status: validated

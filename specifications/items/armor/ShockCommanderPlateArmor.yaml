@@ -1,12 +1,38 @@
 id: tl.armor.shock_commander_plate_armor
 type: Armor
-name: ShockCommanderPlateArmor
-description: "Shock Commander Plate Armor — Epic plate chest armor of the Shock Commander set."
+internalName: ShockCommanderPlateArmor
+displayName: Shock Commander Plate Armor
+localizationKey: armor.shock_commander_plate_armor
+description: Epic plate chest armor of the Shock Commander set. Frontline chest piece with high defense and health.
 rarity: Epic
-version: 1.0.0
+armorType: Plate
+slot: Chest
+itemLevel: 65
+requirement:
+  requiredLevel: 50
+baseStats:
+  - attribute: Defense
+    modifier: Flat
+    value: 220
+  - attribute: MagicDefense
+    modifier: Flat
+    value: 160
+  - attribute: Health
+    modifier: Flat
+    value: 450
+traitPool:
+  - tl.trait.max_health
+  - tl.trait.melee_evasion
+  - tl.trait.hit_chance
+maxTraitSlots: 3
+acquisition:
+  - sourceType: BossDrop
+    dropChance: 3
+version: 2.0.0
 patch: "1.2"
 metadata:
   createdAt: "2026-07-10"
+  updatedAt: "2026-07-10"
   author: TL-AI Team
   source: manually curated
   status: validated
@@ -14,8 +40,3 @@ metadata:
     - epic
     - plate
     - chest
-traits:
-  - tl.trait.max_health
-  - tl.trait.melee_evasion
-sets:
-  - tl.set.shock_commander

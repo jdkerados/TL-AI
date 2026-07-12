@@ -2,10 +2,10 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://tl-ai.local/schemas/boss.schema.json",
   "title": "Boss",
-  "description": "Boss specification. Stored under specifications/bosses/.",
+  "description": "Boss specification (Entity Model V2). Stored under specifications/bosses/.",
   "allOf": [
     {
-      "$ref": "monster.schema.json"
+      "$ref": "entity.schema.json"
     }
   ],
   "properties": {
@@ -14,7 +14,49 @@
     },
     "type": {
       "const": "Boss"
+    },
+    "grade": {
+      "type": "string",
+      "enum": ["Boss", "Archboss"]
+    },
+    "level": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 70
+    },
+    "family": {
+      "$ref": "common.schema.json#/$defs/MonsterFamily"
+    },
+    "combatStats": {
+      "description": "Strongly typed combat stats. Must include Health, Defense, MagicDefense, and Attack or MagicAttack.",
+      "$ref": "common.schema.json#/$defs/StatModifierList"
+    },
+    "skills": {
+      "type": "array",
+      "items": { "$ref": "common.schema.json#/$defs/SkillReference" },
+      "uniqueItems": true
+    },
+    "drops": {
+      "type": "array",
+      "items": { "$ref": "common.schema.json#/$defs/MonsterDrop" }
+    },
+    "zone": {
+      "description": "Zone name (free text until a Zone entity type exists).",
+      "type": "string",
+      "minLength": 1
+    },
+    "encounterType": {
+      "$ref": "common.schema.json#/$defs/EncounterType"
+    },
+    "peaceMode": {
+      "description": "Whether a peace-mode spawn variant exists.",
+      "type": "boolean"
+    },
+    "mechanics": {
+      "type": "array",
+      "items": { "$ref": "common.schema.json#/$defs/BossMechanic" }
     }
   },
+  "required": ["grade", "level", "family", "combatStats", "encounterType", "peaceMode"],
   "unevaluatedProperties": false
 }

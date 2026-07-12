@@ -1,28 +1,39 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://tl-ai.local/schemas/common.schema.json",
-  "title": "Common Definitions",
-  "description": "Shared definitions used by all TL-AI specification schemas. Not a standalone entity schema.",
+  "title": "Common Definitions (Entity Model V2)",
+  "description": "Shared definitions used by all TL-AI specification schemas. Defined by docs/domain/EntityModelV2.md. Not a standalone entity schema.",
   "$defs": {
     "StableId": {
-      "description": "Permanent, never-recycled identifier. Format: tl.<category>.<identifier>. Once published, an ID must never change or be reused.",
+      "description": "Permanent, never-recycled identifier. Format: tl.<category>.<identifier>.",
       "type": "string",
       "pattern": "^tl\\.[a-z_]+\\.[a-z0-9_]+$"
     },
     "PascalCaseName": {
-      "description": "Human-readable entity name in PascalCase.",
+      "description": "Technical entity name in PascalCase. Must equal the file name.",
       "type": "string",
       "pattern": "^[A-Z][A-Za-z0-9]*$",
       "minLength": 1,
       "maxLength": 120
     },
+    "DisplayName": {
+      "description": "Exact in-game English name (free text).",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 200
+    },
+    "LocalizationKey": {
+      "description": "Key into the localization catalogs (specifications/localization/). Format: <category>.<identifier>.",
+      "type": "string",
+      "pattern": "^[a-z_]+\\.[a-z0-9_]+$"
+    },
     "SemanticVersion": {
-      "description": "Specification version (semver MAJOR.MINOR.PATCH). Published specifications are immutable: any change requires a new version.",
+      "description": "Specification version (semver MAJOR.MINOR.PATCH). Published specifications are immutable.",
       "type": "string",
       "pattern": "^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)$"
     },
     "GamePatch": {
-      "description": "Throne & Liberty game patch this specification applies to.",
+      "description": "Throne & Liberty game patch this specification was verified against.",
       "type": "string",
       "pattern": "^\\d+\\.\\d+(\\.\\d+)?$"
     },
@@ -30,69 +41,320 @@
       "description": "Authoring and provenance metadata.",
       "type": "object",
       "properties": {
-        "createdAt": {
-          "description": "Creation date (ISO 8601).",
-          "type": "string",
-          "format": "date"
-        },
-        "updatedAt": {
-          "description": "Last update date (ISO 8601).",
-          "type": "string",
-          "format": "date"
-        },
-        "author": {
-          "description": "Author of the specification.",
-          "type": "string",
-          "minLength": 1
-        },
-        "source": {
-          "description": "Provenance of the data (URL or description).",
-          "type": "string",
-          "minLength": 1
-        },
-        "status": {
-          "description": "Position in the Staging + Validation workflow.",
-          "type": "string",
-          "enum": ["staging", "validated"]
-        },
+        "createdAt": { "type": "string", "format": "date" },
+        "updatedAt": { "type": "string", "format": "date" },
+        "author": { "type": "string", "minLength": 1 },
+        "source": { "type": "string", "minLength": 1 },
+        "status": { "type": "string", "enum": ["staging", "validated"] },
         "tags": {
-          "description": "Free-form classification tags.",
           "type": "array",
-          "items": {
-            "type": "string",
-            "minLength": 1
-          },
+          "items": { "type": "string", "minLength": 1 },
           "uniqueItems": true
         },
-        "notes": {
-          "description": "Free-form notes.",
-          "type": "string"
-        }
+        "notes": { "type": "string" }
       },
       "required": ["createdAt", "status"],
       "additionalProperties": false
     },
     "Rarity": {
-      "description": "Content rarity. Milestone M1 supports Epic and Heroic content only.",
+      "description": "Full content rarity taxonomy (EntityModelV2 section 3.1).",
       "type": "string",
-      "enum": ["Epic", "Heroic"]
+      "enum": ["Common", "Uncommon", "Rare", "Epic", "Epic2", "Heroic", "Legendary"]
+    },
+    "MonsterGrade": {
+      "description": "Monster grade taxonomy (EntityModelV2 section 3.2).",
+      "type": "string",
+      "enum": ["Normal", "Elite", "Named", "Boss", "Archboss"]
+    },
+    "GameplayAttribute": {
+      "description": "Closed catalog of strongly typed gameplay attributes (EntityModelV2 section 6).",
+      "type": "string",
+      "enum": [
+        "MinDamage",
+        "MaxDamage",
+        "Attack",
+        "MagicAttack",
+        "AttackSpeed",
+        "AttackSpeedBoost",
+        "CriticalChance",
+        "CriticalDamage",
+        "HeavyAttackChance",
+        "Hit",
+        "MagicHit",
+        "SkillDamageBoost",
+        "ShieldPenetration",
+        "DefensePenetration",
+        "Defense",
+        "MagicDefense",
+        "MeleeEvasion",
+        "RangedEvasion",
+        "MagicEvasion",
+        "MeleeEndurance",
+        "RangedEndurance",
+        "MagicEndurance",
+        "DamageReduction",
+        "SkillDamageResistance",
+        "ShieldBlockChance",
+        "Health",
+        "HealthRegen",
+        "Mana",
+        "ManaRegen",
+        "ManaCostEfficiency",
+        "StaminaRegen",
+        "CooldownSpeed",
+        "CastTime",
+        "Cooldown",
+        "MoveSpeed",
+        "Range",
+        "AttackRange",
+        "AreaRadius",
+        "ProjectileSpeed",
+        "HealingPower",
+        "HealingReceived",
+        "BuffDuration",
+        "DebuffDuration",
+        "CrowdControlChance",
+        "CrowdControlResistance",
+        "AggroBoost",
+        "WeightLimit",
+        "Luck"
+      ]
+    },
+    "ModifierKind": {
+      "type": "string",
+      "enum": ["Flat", "Percent"]
+    },
+    "WeaponType": {
+      "type": "string",
+      "enum": ["Sword", "Greatsword", "Dagger", "Crossbow", "Longbow", "Staff", "Wand", "SpearAndShield"]
+    },
+    "ArmorType": {
+      "type": "string",
+      "enum": ["Plate", "Leather", "Cloth"]
+    },
+    "ArmorSlot": {
+      "type": "string",
+      "enum": ["Head", "Chest", "Hands", "Legs", "Feet", "Cloak"]
+    },
+    "AccessorySlot": {
+      "type": "string",
+      "enum": ["Necklace", "Bracelet", "Ring", "Belt"]
+    },
+    "TraitCategory": {
+      "type": "string",
+      "enum": ["Offense", "Defense", "Utility", "Resource", "Mobility"]
+    },
+    "CoreType": {
+      "type": "string",
+      "enum": ["Fortitude", "Doom", "Grace"]
+    },
+    "MonsterFamily": {
+      "type": "string",
+      "enum": ["Humanoid", "Beast", "Undead", "Demon", "Construct", "Elemental", "Plant", "Wildkin"]
+    },
+    "EncounterType": {
+      "type": "string",
+      "enum": ["WorldBoss", "ArchBoss", "DungeonBoss", "RaidBoss", "EventBoss"]
+    },
+    "NpcRole": {
+      "type": "string",
+      "enum": ["Merchant", "QuestGiver", "Crafter", "Teleporter", "Storyline", "GuildClerk", "Other"]
+    },
+    "CrowdControlKind": {
+      "type": "string",
+      "enum": ["Stun", "Sleep", "Silence", "Bind", "Slow", "Fear", "Knockdown", "Pull"]
+    },
+    "TraitReference": {
+      "description": "Typed reference to a Trait entity.",
+      "type": "string",
+      "pattern": "^tl\\.trait\\.[a-z0-9_]+$"
+    },
+    "SkillReference": {
+      "description": "Typed reference to a Skill entity.",
+      "type": "string",
+      "pattern": "^tl\\.skill\\.[a-z0-9_]+$"
+    },
+    "BuffReference": {
+      "description": "Typed reference to a Buff entity.",
+      "type": "string",
+      "pattern": "^tl\\.buff\\.[a-z0-9_]+$"
+    },
+    "ItemReference": {
+      "description": "Typed reference to a Weapon, Armor, or Accessory entity.",
+      "type": "string",
+      "pattern": "^tl\\.(weapon|armor|accessory)\\.[a-z0-9_]+$"
+    },
+    "AcquisitionSourceReference": {
+      "description": "Typed reference to a Monster, Boss, NPC, or Event entity.",
+      "type": "string",
+      "pattern": "^tl\\.(monster|boss|npc|event)\\.[a-z0-9_]+$"
+    },
+    "StatModifier": {
+      "description": "One strongly typed attribute modification.",
+      "type": "object",
+      "properties": {
+        "attribute": { "$ref": "#/$defs/GameplayAttribute" },
+        "modifier": { "$ref": "#/$defs/ModifierKind" },
+        "value": { "type": "number" }
+      },
+      "required": ["attribute", "modifier", "value"],
+      "additionalProperties": false
+    },
+    "StatModifierList": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/StatModifier" }
+    },
+    "RarityScaledModifier": {
+      "description": "Attribute modification scaling with the rarity of the carrying item.",
+      "type": "object",
+      "properties": {
+        "attribute": { "$ref": "#/$defs/GameplayAttribute" },
+        "modifier": { "$ref": "#/$defs/ModifierKind" },
+        "valuesByRarity": {
+          "type": "object",
+          "propertyNames": {
+            "enum": ["Common", "Uncommon", "Rare", "Epic", "Epic2", "Heroic", "Legendary"]
+          },
+          "additionalProperties": { "type": "number" },
+          "minProperties": 1
+        }
+      },
+      "required": ["attribute", "modifier", "valuesByRarity"],
+      "additionalProperties": false
+    },
+    "ResourceCost": {
+      "type": "object",
+      "properties": {
+        "resource": { "type": "string", "enum": ["Mana", "Health", "Stamina"] },
+        "amount": { "type": "number", "minimum": 0 }
+      },
+      "required": ["resource", "amount"],
+      "additionalProperties": false
+    },
+    "SkillTiming": {
+      "type": "object",
+      "properties": {
+        "castTime": { "type": "number", "minimum": 0 },
+        "cooldown": { "type": "number", "minimum": 0 },
+        "duration": { "type": "number", "minimum": 0 }
+      },
+      "required": ["castTime", "cooldown"],
+      "additionalProperties": false
+    },
+    "Targeting": {
+      "type": "object",
+      "properties": {
+        "targetType": {
+          "type": "string",
+          "enum": ["Self", "Ally", "Enemy", "Ground", "Cone", "Area"]
+        },
+        "range": { "type": "number", "minimum": 0 },
+        "areaRadius": { "type": "number", "minimum": 0 },
+        "maxTargets": { "type": "integer", "minimum": 1 }
+      },
+      "required": ["targetType", "range"],
+      "additionalProperties": false
+    },
+    "SkillDamage": {
+      "type": "object",
+      "properties": {
+        "baseDamage": { "type": "number", "minimum": 0 },
+        "scalingAttribute": { "type": "string", "enum": ["Attack", "MagicAttack"] },
+        "scalingRatio": { "type": "number", "minimum": 0 },
+        "damageSchool": { "type": "string", "enum": ["Physical", "Magic"] }
+      },
+      "required": ["baseDamage", "scalingAttribute", "scalingRatio", "damageSchool"],
+      "additionalProperties": false
+    },
+    "TickEffect": {
+      "type": "object",
+      "properties": {
+        "interval": { "type": "number", "exclusiveMinimum": 0 },
+        "school": { "type": "string", "enum": ["Physical", "Magic", "Heal"] },
+        "baseAmount": { "type": "number", "minimum": 0 },
+        "scalingAttribute": { "type": "string", "enum": ["Attack", "MagicAttack", "HealingPower"] },
+        "scalingRatio": { "type": "number", "minimum": 0 }
+      },
+      "required": ["interval", "school", "baseAmount"],
+      "additionalProperties": false
+    },
+    "PieceBonus": {
+      "type": "object",
+      "properties": {
+        "pieces": { "type": "integer", "minimum": 2, "maximum": 7 },
+        "modifiers": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/StatModifier" },
+          "minItems": 1
+        },
+        "grantsBuff": { "$ref": "#/$defs/BuffReference" }
+      },
+      "required": ["pieces"],
+      "anyOf": [{ "required": ["modifiers"] }, { "required": ["grantsBuff"] }],
+      "additionalProperties": false
+    },
+    "DropSource": {
+      "type": "object",
+      "properties": {
+        "sourceType": {
+          "type": "string",
+          "enum": ["MonsterDrop", "BossDrop", "Crafting", "Vendor", "Quest", "Event", "WorldChest", "Gacha"]
+        },
+        "source": { "$ref": "#/$defs/AcquisitionSourceReference" },
+        "dropChance": { "type": "number", "exclusiveMinimum": 0, "maximum": 100 }
+      },
+      "required": ["sourceType"],
+      "additionalProperties": false
+    },
+    "Requirement": {
+      "type": "object",
+      "properties": {
+        "requiredLevel": { "type": "integer", "minimum": 1, "maximum": 70 },
+        "requiredWeaponMastery": {
+          "type": "object",
+          "properties": {
+            "weaponType": { "$ref": "#/$defs/WeaponType" },
+            "level": { "type": "integer", "minimum": 1 }
+          },
+          "required": ["weaponType", "level"],
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "MonsterDrop": {
+      "type": "object",
+      "properties": {
+        "item": { "$ref": "#/$defs/ItemReference" },
+        "dropChance": { "type": "number", "exclusiveMinimum": 0, "maximum": 100 },
+        "quantityMin": { "type": "integer", "minimum": 1 },
+        "quantityMax": { "type": "integer", "minimum": 1 }
+      },
+      "required": ["item", "dropChance"],
+      "additionalProperties": false
+    },
+    "BossMechanic": {
+      "type": "object",
+      "properties": {
+        "internalName": { "$ref": "#/$defs/PascalCaseName" },
+        "description": { "type": "string", "minLength": 1 },
+        "triggersBuffs": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/BuffReference" },
+          "uniqueItems": true
+        }
+      },
+      "required": ["internalName", "description"],
+      "additionalProperties": false
     },
     "Reference": {
-      "description": "Reference to another entity by its stable ID.",
+      "description": "Untyped reference to another entity by its stable ID (legacy fields only).",
       "$ref": "#/$defs/StableId"
     },
     "ReferenceList": {
-      "description": "List of references to other entities by stable ID.",
       "type": "array",
-      "items": {
-        "$ref": "#/$defs/Reference"
-      },
+      "items": { "$ref": "#/$defs/Reference" },
       "uniqueItems": true
-    },
-    "LocalizationKey": {
-      "description": "Key into the localization catalog (specifications/localization/).",
-      "type": "string",
-      "pattern": "^[a-z0-9_.]+$"
     }
   }
 }

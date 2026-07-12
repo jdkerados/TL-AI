@@ -13,11 +13,14 @@ def build_ir(specs: list[SpecFile]) -> BuildIR:
             continue
         metadata = spec.data.get("metadata", {})
         status = metadata.get("status", "") if isinstance(metadata, dict) else ""
+        rarity = spec.data.get("rarity")
         entities.append(
             IREntity(
                 stable_id=str(spec.data.get("id", "")),
                 entity_type=str(spec.data.get("type", "")),
-                name=str(spec.data.get("name", "")),
+                internal_name=str(spec.data.get("internalName", "")),
+                display_name=str(spec.data.get("displayName", "")),
+                rarity=str(rarity) if isinstance(rarity, str) else None,
                 version=str(spec.data.get("version", "")),
                 patch=str(spec.data.get("patch", "")),
                 status=str(status),

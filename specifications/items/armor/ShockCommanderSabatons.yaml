@@ -1,12 +1,37 @@
 id: tl.armor.shock_commander_sabatons
 type: Armor
-name: ShockCommanderSabatons
-description: "Shock Commander Sabatons — Epic plate boots of the Shock Commander set."
+internalName: ShockCommanderSabatons
+displayName: Shock Commander Sabatons
+localizationKey: armor.shock_commander_sabatons
+description: Epic plate boots of the Shock Commander set. Sturdy boots with defense and health.
 rarity: Epic
-version: 1.0.0
+armorType: Plate
+slot: Feet
+itemLevel: 65
+requirement:
+  requiredLevel: 50
+baseStats:
+  - attribute: Defense
+    modifier: Flat
+    value: 150
+  - attribute: MagicDefense
+    modifier: Flat
+    value: 110
+  - attribute: Health
+    modifier: Flat
+    value: 250
+traitPool:
+  - tl.trait.max_health
+  - tl.trait.melee_evasion
+maxTraitSlots: 3
+acquisition:
+  - sourceType: BossDrop
+    dropChance: 3
+version: 2.0.0
 patch: "1.2"
 metadata:
   createdAt: "2026-07-10"
+  updatedAt: "2026-07-10"
   author: TL-AI Team
   source: manually curated
   status: validated
@@ -14,7 +39,3 @@ metadata:
     - epic
     - plate
     - boots
-traits:
-  - tl.trait.max_health
-sets:
-  - tl.set.shock_commander

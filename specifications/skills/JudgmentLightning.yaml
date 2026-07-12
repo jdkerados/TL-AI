@@ -1,12 +1,33 @@
 id: tl.skill.judgment_lightning
 type: Skill
-name: JudgmentLightning
-description: "Judgment Lightning — Epic staff skill: calls down a bolt of lightning."
+internalName: JudgmentLightning
+displayName: Judgment Lightning
+localizationKey: skill.judgment_lightning
+description: Epic staff skill. Calls down a bolt of lightning dealing heavy magic damage in an area.
 rarity: Epic
-version: 1.0.0
+skillType: Active
+weaponType: Staff
+timing:
+  castTime: 1.5
+  cooldown: 24
+cost:
+  - resource: Mana
+    amount: 120
+targeting:
+  targetType: Ground
+  range: 22
+  areaRadius: 4
+  maxTargets: 6
+damage:
+  baseDamage: 300
+  scalingAttribute: MagicAttack
+  scalingRatio: 210
+  damageSchool: Magic
+version: 2.0.0
 patch: "1.2"
 metadata:
   createdAt: "2026-07-10"
+  updatedAt: "2026-07-10"
   author: TL-AI Team
   source: manually curated
   status: validated

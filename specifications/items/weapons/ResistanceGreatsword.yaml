@@ -1,17 +1,38 @@
 id: tl.weapon.resistance_greatsword
 type: Weapon
-name: ResistanceGreatsword
-description: "Resistance Greatsword — Heroic crafted greatsword of the Resistance."
+internalName: ResistanceGreatsword
+displayName: Resistance Greatsword
+localizationKey: weapon.resistance_greatsword
+description: Heroic crafted greatsword of the Resistance. Solid heavy-attack platform while working toward Epic drops.
 rarity: Heroic
-version: 1.0.0
+weaponType: Greatsword
+itemLevel: 55
+requirement:
+  requiredLevel: 45
+baseStats:
+  - attribute: MinDamage
+    modifier: Flat
+    value: 54
+  - attribute: MaxDamage
+    modifier: Flat
+    value: 90
+  - attribute: AttackSpeed
+    modifier: Flat
+    value: 1.2
+traitPool:
+  - tl.trait.heavy_attack_chance
+  - tl.trait.max_health
+maxTraitSlots: 2
+acquisition:
+  - sourceType: Crafting
+version: 2.0.0
 patch: "1.2"
 metadata:
   createdAt: "2026-07-10"
+  updatedAt: "2026-07-10"
   author: TL-AI Team
   source: manually curated
   status: validated
   tags:
     - heroic
     - greatsword
-traits:
-  - tl.trait.heavy_attack_chance

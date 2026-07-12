@@ -1,18 +1,30 @@
 id: tl.set.arcane_shadow
-type: Set
-name: ArcaneShadow
-description: "Arcane Shadow set — Epic cloth armor set bonus."
+type: SetBonus
+internalName: ArcaneShadow
+displayName: Arcane Shadow
+localizationKey: set.arcane_shadow
+description: Epic cloth armor set bonus for casters. Grants skill damage and mana regeneration with more pieces equipped.
 rarity: Epic
-version: 1.0.0
+members:
+  - tl.armor.arcane_shadow_robes
+  - tl.armor.arcane_shadow_hat
+bonuses:
+  - pieces: 2
+    modifiers:
+      - attribute: SkillDamageBoost
+        modifier: Percent
+        value: 3
+      - attribute: ManaRegen
+        modifier: Flat
+        value: 35
+version: 2.0.0
 patch: "1.2"
 metadata:
   createdAt: "2026-07-10"
+  updatedAt: "2026-07-10"
   author: TL-AI Team
   source: manually curated
   status: validated
   tags:
     - epic
     - cloth
-members:
-  - tl.armor.arcane_shadow_robes
-  - tl.armor.arcane_shadow_hat

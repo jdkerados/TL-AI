@@ -1,17 +1,25 @@
 id: tl.skill_core.power_core
 type: SkillCore
-name: PowerCore
-description: "Power Core — Epic skill core amplifying raw skill damage."
+internalName: PowerCore
+displayName: Power Core
+localizationKey: skill_core.power_core
+description: Epic Doom skill core amplifying raw skill damage of heavy nuke skills.
 rarity: Epic
-version: 1.0.0
+coreType: Doom
+skills:
+  - tl.skill.gigantic_impact
+  - tl.skill.judgment_lightning
+effects:
+  - attribute: SkillDamageBoost
+    modifier: Percent
+    value: 6
+version: 2.0.0
 patch: "1.2"
 metadata:
   createdAt: "2026-07-10"
+  updatedAt: "2026-07-10"
   author: TL-AI Team
   source: manually curated
   status: validated
   tags:
     - epic
-skills:
-  - tl.skill.gigantic_impact
-  - tl.skill.judgment_lightning

@@ -1,17 +1,35 @@
 id: tl.accessory.resistance_belt
 type: Accessory
-name: ResistanceBelt
-description: "Resistance Belt — Heroic crafted belt of the Resistance."
+internalName: ResistanceBelt
+displayName: Resistance Belt
+localizationKey: accessory.resistance_belt
+description: Heroic crafted belt of the Resistance with cooldown support.
 rarity: Heroic
-version: 1.0.0
+slot: Belt
+itemLevel: 55
+requirement:
+  requiredLevel: 45
+baseStats:
+  - attribute: CooldownSpeed
+    modifier: Percent
+    value: 2
+  - attribute: Health
+    modifier: Flat
+    value: 200
+traitPool:
+  - tl.trait.cooldown_speed
+  - tl.trait.max_health
+maxTraitSlots: 2
+acquisition:
+  - sourceType: Crafting
+version: 2.0.0
 patch: "1.2"
 metadata:
   createdAt: "2026-07-10"
+  updatedAt: "2026-07-10"
   author: TL-AI Team
   source: manually curated
   status: validated
   tags:
     - heroic
     - belt
-traits:
-  - tl.trait.cooldown_speed

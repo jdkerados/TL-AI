@@ -1,17 +1,25 @@
 id: tl.skill_core.swift_core
 type: SkillCore
-name: SwiftCore
-description: "Swift Core — Heroic skill core reducing cast and cooldown times."
+internalName: SwiftCore
+displayName: Swift Core
+localizationKey: skill_core.swift_core
+description: Heroic Grace skill core reducing cooldowns of mobile ranged skills.
 rarity: Heroic
-version: 1.0.0
+coreType: Grace
+skills:
+  - tl.skill.strafing
+  - tl.skill.zephyrs_nock
+effects:
+  - attribute: CooldownSpeed
+    modifier: Percent
+    value: 4
+version: 2.0.0
 patch: "1.2"
 metadata:
   createdAt: "2026-07-10"
+  updatedAt: "2026-07-10"
   author: TL-AI Team
   source: manually curated
   status: validated
   tags:
     - heroic
-skills:
-  - tl.skill.strafing
-  - tl.skill.zephyrs_nock

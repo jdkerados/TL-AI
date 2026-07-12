@@ -2,10 +2,30 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://tl-ai.local/schemas/skill.schema.json",
   "title": "Skill",
-  "description": "Skill specification. Stored under specifications/skills/.",
+  "description": "Skill specification (Entity Model V2). Stored under specifications/skills/.",
   "allOf": [
     {
       "$ref": "entity.schema.json"
+    },
+    {
+      "if": {
+        "properties": { "skillType": { "const": "Active" } },
+        "required": ["skillType"]
+      },
+      "then": {
+        "required": ["timing", "cost", "targeting"],
+        "properties": {
+          "passiveEffects": false
+        }
+      },
+      "else": {
+        "required": ["passiveEffects"],
+        "properties": {
+          "timing": false,
+          "cost": false,
+          "targeting": false
+        }
+      }
     }
   ],
   "properties": {
@@ -18,11 +38,44 @@
     "rarity": {
       "$ref": "common.schema.json#/$defs/Rarity"
     },
-    "buffs": {
-      "description": "References to Buff entities applied by this skill.",
-      "$ref": "common.schema.json#/$defs/ReferenceList"
+    "skillType": {
+      "type": "string",
+      "enum": ["Active", "Passive"]
+    },
+    "weaponType": {
+      "$ref": "common.schema.json#/$defs/WeaponType"
+    },
+    "timing": {
+      "$ref": "common.schema.json#/$defs/SkillTiming"
+    },
+    "cost": {
+      "description": "Resource costs of the skill (empty list = free skill).",
+      "type": "array",
+      "items": { "$ref": "common.schema.json#/$defs/ResourceCost" }
+    },
+    "targeting": {
+      "$ref": "common.schema.json#/$defs/Targeting"
+    },
+    "damage": {
+      "$ref": "common.schema.json#/$defs/SkillDamage"
+    },
+    "passiveEffects": {
+      "description": "Strongly typed passive effects (Passive skills only).",
+      "type": "array",
+      "items": { "$ref": "common.schema.json#/$defs/StatModifier" },
+      "minItems": 1
+    },
+    "appliesBuffs": {
+      "type": "array",
+      "items": { "$ref": "common.schema.json#/$defs/BuffReference" },
+      "uniqueItems": true
+    },
+    "appliesDebuffs": {
+      "type": "array",
+      "items": { "$ref": "common.schema.json#/$defs/BuffReference" },
+      "uniqueItems": true
     }
   },
-  "required": ["rarity"],
+  "required": ["rarity", "skillType", "weaponType"],
   "unevaluatedProperties": false
 }

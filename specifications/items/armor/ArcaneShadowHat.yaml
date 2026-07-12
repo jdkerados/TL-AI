@@ -1,12 +1,37 @@
 id: tl.armor.arcane_shadow_hat
 type: Armor
-name: ArcaneShadowHat
-description: "Arcane Shadow Hat — Epic cloth head armor of the Arcane Shadow set."
+internalName: ArcaneShadowHat
+displayName: Arcane Shadow Hat
+localizationKey: armor.arcane_shadow_hat
+description: Epic cloth head armor of the Arcane Shadow set. Caster headpiece with cooldown speed.
 rarity: Epic
-version: 1.0.0
+armorType: Cloth
+slot: Head
+itemLevel: 65
+requirement:
+  requiredLevel: 50
+baseStats:
+  - attribute: Defense
+    modifier: Flat
+    value: 100
+  - attribute: MagicDefense
+    modifier: Flat
+    value: 170
+  - attribute: CooldownSpeed
+    modifier: Percent
+    value: 3
+traitPool:
+  - tl.trait.cooldown_speed
+  - tl.trait.mana_regen
+maxTraitSlots: 3
+acquisition:
+  - sourceType: BossDrop
+    dropChance: 3
+version: 2.0.0
 patch: "1.2"
 metadata:
   createdAt: "2026-07-10"
+  updatedAt: "2026-07-10"
   author: TL-AI Team
   source: manually curated
   status: validated
@@ -14,7 +39,3 @@ metadata:
     - epic
     - cloth
     - head
-traits:
-  - tl.trait.cooldown_speed
-sets:
-  - tl.set.arcane_shadow

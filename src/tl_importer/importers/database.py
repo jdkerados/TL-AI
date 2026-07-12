@@ -1,17 +1,19 @@
 """Database importer: upserts compiled IR entities into PostgreSQL or SQLite.
 
-Behavior:
+Behavior (Entity Model V2):
 - UPSERT by stable ID.
 - Update only if the semantic version is strictly newer; downgrades are rejected.
 - Imported entities are marked IsValidated = true.
-- Specification metadata, patch version, and semantic version are stored.
+- internalName, displayName, rarity, description, metadata, and the full payload are stored.
+- Association tables are populated from the canonical relationship fields
+  (traitPool, members, skills, appliesBuffs/appliesDebuffs).
 """
 
 import logging
 from dataclasses import dataclass, field
 from typing import Any
 
-from sqlalchemy import Engine, select
+from sqlalchemy import Engine, Table, select
 from sqlalchemy.orm import Session
 
 from tl_compiler.ir import IREntity
@@ -32,6 +34,13 @@ from tl_database.models import (
     Trait,
     Weapon,
 )
+from tl_database.models.associations import (
+    item_traits,
+    monster_skills,
+    set_bonus_items,
+    skill_buffs,
+    skill_core_skills,
+)
 from tl_database.session import create_session_factory
 
 logger = logging.getLogger("tl_importer.database")
@@ -45,7 +54,6 @@ MODEL_BY_TYPE: dict[str, type[Entity]] = {
     "SkillCore": SkillCore,
     "Trait": Trait,
     "Buff": Buff,
-    "Set": SetBonus,
     "SetBonus": SetBonus,
     "Monster": Monster,
     "Boss": Boss,
@@ -58,6 +66,53 @@ MODEL_BY_TYPE: dict[str, type[Entity]] = {
 def parse_version(version: str) -> tuple[int, ...]:
     """Parse a semantic version into a comparable tuple."""
     return tuple(int(part) for part in version.split("."))
+
+
+def _relationship_pairs(entity: IREntity) -> list[tuple[Table, str, str]]:
+    """Canonical relationship rows for one entity: (table, owner column, target stable ID)."""
+    payload = entity.payload
+    pairs: list[tuple[Table, str, str]] = []
+
+    def _refs(field: str) -> list[str]:
+        values = payload.get(field)
+        return (
+            [value for value in values if isinstance(value, str)]
+            if isinstance(values, list)
+            else []
+        )
+
+    if entity.entity_type in ("Weapon", "Armor", "Accessory"):
+        pairs.extend((item_traits, "item_id", ref) for ref in _refs("traitPool"))
+    elif entity.entity_type == "SetBonus":
+        pairs.extend((set_bonus_items, "set_bonus_id", ref) for ref in _refs("members"))
+    elif entity.entity_type == "Skill":
+        buff_refs = _refs("appliesBuffs") + _refs("appliesDebuffs")
+        pairs.extend((skill_buffs, "skill_id", ref) for ref in buff_refs)
+    elif entity.entity_type == "SkillCore":
+        pairs.extend((skill_core_skills, "skill_core_id", ref) for ref in _refs("skills"))
+    elif entity.entity_type in ("Monster", "Boss"):
+        pairs.extend((monster_skills, "monster_id", ref) for ref in _refs("skills"))
+    return pairs
+
+
+OWNER_TABLES: dict[str, tuple[tuple[Table, str], ...]] = {
+    "Weapon": ((item_traits, "item_id"),),
+    "Armor": ((item_traits, "item_id"),),
+    "Accessory": ((item_traits, "item_id"),),
+    "SetBonus": ((set_bonus_items, "set_bonus_id"),),
+    "Skill": ((skill_buffs, "skill_id"),),
+    "SkillCore": ((skill_core_skills, "skill_core_id"),),
+    "Monster": ((monster_skills, "monster_id"),),
+    "Boss": ((monster_skills, "monster_id"),),
+}
+
+TARGET_COLUMN: dict[str, str] = {
+    "item_traits": "trait_id",
+    "set_bonus_items": "item_id",
+    "skill_buffs": "buff_id",
+    "skill_core_skills": "skill_id",
+    "monster_skills": "skill_id",
+}
 
 
 @dataclass(frozen=True)
@@ -90,6 +145,7 @@ class ImportStats:
     skipped: int = 0
     rejected_downgrades: int = 0
     unsupported: int = 0
+    relationships: int = 0
     actions: list[EntityAction] = field(default_factory=list)
     errors: list[str] = field(default_factory=list)
 
@@ -103,6 +159,7 @@ class ImportStats:
             "skipped": self.skipped,
             "rejectedDowngrades": self.rejected_downgrades,
             "unsupported": self.unsupported,
+            "relationships": self.relationships,
             "errors": self.errors,
             "entities": [action.to_dict() for action in self.actions],
         }
@@ -119,18 +176,48 @@ class DatabaseImporter:
         with factory() as session:
             for entity in entities:
                 self._upsert(session, entity, stats)
+            session.flush()
+            self._link_relationships(session, entities, stats)
             session.commit()
         logger.info(
             "[%s] import finished: %d inserted, %d updated, %d skipped, "
-            "%d downgrade(s) rejected, %d unsupported",
+            "%d downgrade(s) rejected, %d unsupported, %d relationship(s)",
             name,
             stats.inserted,
             stats.updated,
             stats.skipped,
             stats.rejected_downgrades,
             stats.unsupported,
+            stats.relationships,
         )
         return stats
+
+    def _link_relationships(
+        self, session: Session, entities: tuple[IREntity, ...], stats: ImportStats
+    ) -> None:
+        """Populate the association tables from the canonical relationship fields."""
+        rows = session.execute(select(Entity.stable_id, Entity.id)).tuples().all()
+        id_by_stable: dict[str, Any] = dict(rows)
+        for entity in entities:
+            owner_pk = id_by_stable.get(entity.stable_id)
+            if owner_pk is None:
+                continue
+            for table, owner_column in OWNER_TABLES.get(entity.entity_type, ()):
+                session.execute(table.delete().where(table.c[owner_column] == owner_pk))
+            for table, owner_column, target_stable_id in _relationship_pairs(entity):
+                target_pk = id_by_stable.get(target_stable_id)
+                if target_pk is None:
+                    stats.errors.append(
+                        f"{entity.stable_id}: relationship target {target_stable_id!r} "
+                        "not present in database"
+                    )
+                    continue
+                session.execute(
+                    table.insert().values(
+                        {owner_column: owner_pk, TARGET_COLUMN[table.name]: target_pk}
+                    )
+                )
+                stats.relationships += 1
 
     def _upsert(self, session: Session, entity: IREntity, stats: ImportStats) -> None:
         model = MODEL_BY_TYPE.get(entity.entity_type)
@@ -146,7 +233,6 @@ class DatabaseImporter:
             return
         meta = {
             "specification": entity.payload.get("metadata", {}),
-            "rarity": entity.payload.get("rarity"),
             "references": list(entity.references),
         }
         existing = session.scalar(select(Entity).where(Entity.stable_id == entity.stable_id))
@@ -154,12 +240,15 @@ class DatabaseImporter:
             session.add(
                 model(
                     stable_id=entity.stable_id,
-                    name=entity.name,
+                    name=entity.internal_name,
+                    display_name=entity.display_name,
+                    rarity=entity.rarity,
                     description=entity.payload.get("description"),
                     semantic_version=entity.version,
                     patch_version=entity.patch,
                     is_validated=True,
                     meta=meta,
+                    payload=entity.payload,
                 )
             )
             stats.inserted += 1
@@ -176,12 +265,15 @@ class DatabaseImporter:
             return
         old_version = existing.semantic_version
         if parse_version(entity.version) > parse_version(old_version):
-            existing.name = entity.name
+            existing.name = entity.internal_name
+            existing.display_name = entity.display_name
+            existing.rarity = entity.rarity
             existing.description = entity.payload.get("description")
             existing.semantic_version = entity.version
             existing.patch_version = entity.patch
             existing.is_validated = True
             existing.meta = meta
+            existing.payload = entity.payload
             stats.updated += 1
             stats.actions.append(
                 EntityAction(entity.stable_id, "updated", old_version, entity.version)

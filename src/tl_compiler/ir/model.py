@@ -10,7 +10,9 @@ class IREntity:
 
     stable_id: str
     entity_type: str
-    name: str
+    internal_name: str
+    display_name: str
+    rarity: str | None
     version: str
     patch: str
     status: str
@@ -23,7 +25,9 @@ class IREntity:
         return {
             "stableId": self.stable_id,
             "type": self.entity_type,
-            "name": self.name,
+            "internalName": self.internal_name,
+            "displayName": self.display_name,
+            "rarity": self.rarity,
             "version": self.version,
             "patch": self.patch,
             "status": self.status,

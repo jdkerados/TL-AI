@@ -1,17 +1,36 @@
 id: tl.accessory.abyssal_grace_pendant
 type: Accessory
-name: AbyssalGracePendant
-description: "Abyssal Grace Pendant — Epic necklace."
+internalName: AbyssalGracePendant
+displayName: Abyssal Grace Pendant
+localizationKey: accessory.abyssal_grace_pendant
+description: Epic necklace with a large health bonus for frontline builds.
 rarity: Epic
-version: 1.0.0
+slot: Necklace
+itemLevel: 65
+requirement:
+  requiredLevel: 50
+baseStats:
+  - attribute: Health
+    modifier: Flat
+    value: 550
+  - attribute: HealthRegen
+    modifier: Flat
+    value: 45
+traitPool:
+  - tl.trait.max_health
+  - tl.trait.melee_evasion
+maxTraitSlots: 2
+acquisition:
+  - sourceType: BossDrop
+    dropChance: 2
+version: 2.0.0
 patch: "1.2"
 metadata:
   createdAt: "2026-07-10"
+  updatedAt: "2026-07-10"
   author: TL-AI Team
   source: manually curated
   status: validated
   tags:
     - epic
     - necklace
-traits:
-  - tl.trait.max_health

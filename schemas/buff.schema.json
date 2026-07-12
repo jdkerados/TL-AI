@@ -2,10 +2,20 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://tl-ai.local/schemas/buff.schema.json",
   "title": "Buff",
-  "description": "Buff/debuff specification. Stored under specifications/buffs/.",
+  "description": "Buff/Debuff specification (Entity Model V2). Stored under specifications/buffs/.",
   "allOf": [
     {
       "$ref": "entity.schema.json"
+    },
+    {
+      "oneOf": [{ "required": ["duration"] }, { "required": ["permanent"] }]
+    },
+    {
+      "anyOf": [
+        { "required": ["modifiers"] },
+        { "required": ["tick"] },
+        { "required": ["crowdControl"] }
+      ]
     }
   ],
   "properties": {
@@ -15,10 +25,38 @@
     "type": {
       "const": "Buff"
     },
-    "stats": {
-      "description": "References to Stat entities affected by this buff.",
-      "$ref": "common.schema.json#/$defs/ReferenceList"
+    "buffCategory": {
+      "type": "string",
+      "enum": ["Buff", "Debuff"]
+    },
+    "dispellable": {
+      "type": "boolean"
+    },
+    "maxStacks": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "duration": {
+      "description": "Effect duration in seconds.",
+      "type": "number",
+      "exclusiveMinimum": 0
+    },
+    "permanent": {
+      "description": "Permanent effect (mutually exclusive with duration).",
+      "const": true
+    },
+    "modifiers": {
+      "type": "array",
+      "items": { "$ref": "common.schema.json#/$defs/StatModifier" },
+      "minItems": 1
+    },
+    "tick": {
+      "$ref": "common.schema.json#/$defs/TickEffect"
+    },
+    "crowdControl": {
+      "$ref": "common.schema.json#/$defs/CrowdControlKind"
     }
   },
+  "required": ["buffCategory", "dispellable", "maxStacks"],
   "unevaluatedProperties": false
 }

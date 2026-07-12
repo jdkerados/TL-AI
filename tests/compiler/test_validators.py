@@ -20,7 +20,7 @@ def test_valid_corpus_has_no_issues(specs_dir: Path, schemas_dir: Path) -> None:
 def test_schema_violation_detected(specs_dir: Path, schemas_dir: Path) -> None:
     content = (specs_dir / "traits" / "TestTrait.yaml").read_text(encoding="utf-8")
     (specs_dir / "traits" / "TestTrait.yaml").write_text(
-        content.replace("version: 1.0.0\n", ""), encoding="utf-8"
+        content.replace("version: 2.0.0\n", ""), encoding="utf-8"
     )
     assert "SCHEMA_INVALID" in _codes(specs_dir, schemas_dir)
 
@@ -43,7 +43,7 @@ def test_id_category_mismatch_detected(specs_dir: Path, schemas_dir: Path) -> No
 def test_duplicate_stable_id_detected(specs_dir: Path, schemas_dir: Path) -> None:
     content = (specs_dir / "traits" / "TestTrait.yaml").read_text(encoding="utf-8")
     (specs_dir / "traits" / "TestTraitCopy.yaml").write_text(
-        content.replace("name: TestTrait", "name: TestTraitCopy"), encoding="utf-8"
+        content.replace("internalName: TestTrait", "internalName: TestTraitCopy"), encoding="utf-8"
     )
     assert "ID_DUPLICATE" in _codes(specs_dir, schemas_dir)
 

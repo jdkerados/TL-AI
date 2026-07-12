@@ -1,15 +1,29 @@
 id: tl.trait.mana_regen
 type: Trait
-name: ManaRegen
-description: "Mana Regen trait: increases mana regeneration."
+internalName: ManaRegen
+displayName: Mana Regen
+localizationKey: trait.mana_regen
+description: Increases the mana regeneration of the carrying item's wearer.
 rarity: Epic
-version: 1.0.0
+traitCategory: Resource
+appliesTo:
+  - Weapon
+  - Armor
+  - Accessory
+effects:
+  - attribute: ManaRegen
+    modifier: Flat
+    valuesByRarity:
+      Epic: 39
+      Heroic: 27
+version: 2.0.0
 patch: "1.2"
 metadata:
   createdAt: "2026-07-10"
+  updatedAt: "2026-07-10"
   author: TL-AI Team
   source: manually curated
   status: validated
   tags:
     - epic
-    - utility
+    - resource

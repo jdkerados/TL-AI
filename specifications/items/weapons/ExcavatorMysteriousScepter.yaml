@@ -1,18 +1,43 @@
 id: tl.weapon.excavator_mysterious_scepter
 type: Weapon
-name: ExcavatorMysteriousScepter
-description: "Excavator's Mysterious Scepter — Epic wand dropped by the world boss Excavator-9."
+internalName: ExcavatorMysteriousScepter
+displayName: Excavator's Mysterious Scepter
+localizationKey: weapon.excavator_mysterious_scepter
+description: Epic wand dropped by the world boss Excavator-9. Supportive wand with health and mana sustain.
 rarity: Epic
-version: 1.0.0
+weaponType: Wand
+itemLevel: 65
+requirement:
+  requiredLevel: 50
+baseStats:
+  - attribute: MinDamage
+    modifier: Flat
+    value: 46
+  - attribute: MaxDamage
+    modifier: Flat
+    value: 76
+  - attribute: MagicAttack
+    modifier: Flat
+    value: 70
+  - attribute: HealingPower
+    modifier: Percent
+    value: 4
+traitPool:
+  - tl.trait.max_health
+  - tl.trait.mana_regen
+  - tl.trait.cooldown_speed
+maxTraitSlots: 3
+acquisition:
+  - sourceType: BossDrop
+    dropChance: 2.5
+version: 2.0.0
 patch: "1.2"
 metadata:
   createdAt: "2026-07-10"
+  updatedAt: "2026-07-10"
   author: TL-AI Team
   source: manually curated
   status: validated
   tags:
     - epic
     - wand
-traits:
-  - tl.trait.max_health
-  - tl.trait.mana_regen

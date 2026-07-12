@@ -1,18 +1,43 @@
 id: tl.weapon.adentus_gargantuan_greatsword
 type: Weapon
-name: AdentusGargantuanGreatsword
-description: "Adentus's Gargantuan Greatsword — Epic greatsword dropped by the world boss Adentus."
+internalName: AdentusGargantuanGreatsword
+displayName: Adentus's Gargantuan Greatsword
+localizationKey: weapon.adentus_gargantuan_greatsword
+description: Epic greatsword dropped by the world boss Adentus. Trades attack speed for very high hit and heavy attack pressure.
 rarity: Epic
-version: 1.0.0
+weaponType: Greatsword
+itemLevel: 65
+requirement:
+  requiredLevel: 50
+baseStats:
+  - attribute: MinDamage
+    modifier: Flat
+    value: 68
+  - attribute: MaxDamage
+    modifier: Flat
+    value: 112
+  - attribute: AttackSpeed
+    modifier: Flat
+    value: 1.2
+  - attribute: HeavyAttackChance
+    modifier: Flat
+    value: 150
+traitPool:
+  - tl.trait.max_health
+  - tl.trait.heavy_attack_chance
+  - tl.trait.hit_chance
+maxTraitSlots: 3
+acquisition:
+  - sourceType: BossDrop
+    dropChance: 2.5
+version: 2.0.0
 patch: "1.2"
 metadata:
   createdAt: "2026-07-10"
+  updatedAt: "2026-07-10"
   author: TL-AI Team
   source: manually curated
   status: validated
   tags:
     - epic
     - greatsword
-traits:
-  - tl.trait.max_health
-  - tl.trait.heavy_attack_chance

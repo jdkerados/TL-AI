@@ -1,17 +1,36 @@
 id: tl.accessory.gilded_infernal_wristlet
 type: Accessory
-name: GildedInfernalWristlet
-description: "Gilded Infernal Wristlet — Epic bracelet."
+internalName: GildedInfernalWristlet
+displayName: Gilded Infernal Wristlet
+localizationKey: accessory.gilded_infernal_wristlet
+description: Epic bracelet favoring attack speed and sustained damage.
 rarity: Epic
-version: 1.0.0
+slot: Bracelet
+itemLevel: 65
+requirement:
+  requiredLevel: 50
+baseStats:
+  - attribute: AttackSpeedBoost
+    modifier: Percent
+    value: 3.5
+  - attribute: Hit
+    modifier: Flat
+    value: 50
+traitPool:
+  - tl.trait.attack_speed
+  - tl.trait.hit_chance
+maxTraitSlots: 2
+acquisition:
+  - sourceType: BossDrop
+    dropChance: 2
+version: 2.0.0
 patch: "1.2"
 metadata:
   createdAt: "2026-07-10"
+  updatedAt: "2026-07-10"
   author: TL-AI Team
   source: manually curated
   status: validated
   tags:
     - epic
     - bracelet
-traits:
-  - tl.trait.attack_speed

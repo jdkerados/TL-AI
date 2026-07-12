@@ -1,18 +1,43 @@
 id: tl.weapon.talus_crystalline_staff
 type: Weapon
-name: TalusCrystallineStaff
-description: "Talus's Crystalline Staff — Epic staff dropped by the world boss Talus."
+internalName: TalusCrystallineStaff
+displayName: Talus's Crystalline Staff
+localizationKey: weapon.talus_crystalline_staff
+description: Epic staff dropped by the world boss Talus. High magic damage with strong critical rating and mana sustain.
 rarity: Epic
-version: 1.0.0
+weaponType: Staff
+itemLevel: 65
+requirement:
+  requiredLevel: 50
+baseStats:
+  - attribute: MinDamage
+    modifier: Flat
+    value: 61
+  - attribute: MaxDamage
+    modifier: Flat
+    value: 101
+  - attribute: MagicAttack
+    modifier: Flat
+    value: 90
+  - attribute: CriticalChance
+    modifier: Flat
+    value: 120
+traitPool:
+  - tl.trait.critical_hit_chance
+  - tl.trait.mana_regen
+  - tl.trait.cooldown_speed
+maxTraitSlots: 3
+acquisition:
+  - sourceType: BossDrop
+    dropChance: 2.5
+version: 2.0.0
 patch: "1.2"
 metadata:
   createdAt: "2026-07-10"
+  updatedAt: "2026-07-10"
   author: TL-AI Team
   source: manually curated
   status: validated
   tags:
     - epic
     - staff
-traits:
-  - tl.trait.critical_hit_chance
-  - tl.trait.mana_regen

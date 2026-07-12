@@ -2,10 +2,15 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://tl-ai.local/schemas/accessory.schema.json",
   "title": "Accessory",
-  "description": "Accessory item specification. Stored under specifications/items/accessories/.",
+  "description": "Accessory item specification (Entity Model V2). Stored under specifications/items/accessories/.",
   "allOf": [
     {
       "$ref": "item.schema.json"
+    },
+    {
+      "properties": {
+        "baseStats": { "minItems": 1 }
+      }
     }
   ],
   "properties": {
@@ -14,7 +19,11 @@
     },
     "type": {
       "const": "Accessory"
+    },
+    "slot": {
+      "$ref": "common.schema.json#/$defs/AccessorySlot"
     }
   },
+  "required": ["slot"],
   "unevaluatedProperties": false
 }

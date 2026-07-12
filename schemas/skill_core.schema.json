@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://tl-ai.local/schemas/skill_core.schema.json",
   "title": "SkillCore",
-  "description": "Skill core specification. Stored under specifications/skill_cores/.",
+  "description": "Skill core specification (Entity Model V2). Stored under specifications/skill_cores/.",
   "allOf": [
     {
       "$ref": "entity.schema.json"
@@ -18,11 +18,23 @@
     "rarity": {
       "$ref": "common.schema.json#/$defs/Rarity"
     },
+    "coreType": {
+      "$ref": "common.schema.json#/$defs/CoreType"
+    },
     "skills": {
-      "description": "References to Skill entities this core applies to.",
-      "$ref": "common.schema.json#/$defs/ReferenceList"
+      "description": "Skills this core applies to (typed references).",
+      "type": "array",
+      "items": { "$ref": "common.schema.json#/$defs/SkillReference" },
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "effects": {
+      "description": "Strongly typed effects granted by the core.",
+      "type": "array",
+      "items": { "$ref": "common.schema.json#/$defs/StatModifier" },
+      "minItems": 1
     }
   },
-  "required": ["rarity"],
+  "required": ["rarity", "coreType", "skills", "effects"],
   "unevaluatedProperties": false
 }
